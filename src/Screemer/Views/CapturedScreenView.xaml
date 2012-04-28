@@ -6,8 +6,8 @@
                       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                       Title="CapturedScreenView"
                       Width="300"
-                      Background="WhiteSmoke"
                       Height="300"
+                      Background="WhiteSmoke"
                       MouseLeftButtonDown="DragMoveWindow"
                       ShowTitleBar="False">
     <Grid>

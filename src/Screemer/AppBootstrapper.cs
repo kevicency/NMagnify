@@ -29,7 +29,7 @@ namespace Screemer
 
 		    builder.Register<IShell, ShellViewModel>();
 		    builder.Register<ShellView>();
-		    builder.Register<Dispatcher>(c => c.Resolve<ShellView>().Dispatcher);
+		    builder.Register<CapturedScreenViewModel>();
 
 		    builder.Register<IScreenCapturer, BitmapScreenCapturer>().ControlledBy<TransientLifecycle>();
 		    builder.Register<BitmapScreenCapturer>().ControlledBy<TransientLifecycle>();

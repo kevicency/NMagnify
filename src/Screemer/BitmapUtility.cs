@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
@@ -25,10 +22,7 @@ namespace Screemer
         {
             BitmapSource source = null;
 
-            Action<object> dispatcherDelegate = x =>
-            {
-                source = ConvertBitmapToImageSource(x as Bitmap);
-            };
+            Action<object> dispatcherDelegate = x => { source = ConvertBitmapToImageSource(x as Bitmap); };
             dispatcher.Invoke(dispatcherDelegate, bitmap);
 
             return source;
@@ -39,10 +33,10 @@ namespace Screemer
             IntPtr hBitmap = bitmap.GetHbitmap();
 
             BitmapSource source = Imaging.CreateBitmapSourceFromHBitmap(
-                    hBitmap,
-                    IntPtr.Zero,
-                    Int32Rect.Empty,
-                    BitmapSizeOptions.FromEmptyOptions());
+                hBitmap,
+                IntPtr.Zero,
+                Int32Rect.Empty,
+                BitmapSizeOptions.FromEmptyOptions());
 
             DeleteObject(hBitmap);
 

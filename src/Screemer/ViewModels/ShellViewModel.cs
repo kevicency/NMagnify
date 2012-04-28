@@ -1,18 +1,16 @@
-﻿using System.ComponentModel.Composition;
-using System.Drawing;
-using System.Windows.Media;
-using Caliburn.Micro;
-using Screemer.Model;
+﻿using Caliburn.Micro;
 
-namespace Screemer.ViewModels 
+namespace Screemer.ViewModels
 {
     public class ShellViewModel : Screen, IShell
     {
-
-        protected override void OnActivate()
+        public ShellViewModel(CapturedScreenViewModel capturedScreen)
         {
-            base.OnActivate();
-            IoC.Get<IWindowManager>().ShowWindow(IoC.Get<CapturedScreenViewModel>());
+            DisplayName = "Screemer";
+            CapturedScreen = capturedScreen;
+            CapturedScreen.DeactivateWith(this);
         }
+
+        public CapturedScreenViewModel CapturedScreen { get; private set; }
     }
 }
