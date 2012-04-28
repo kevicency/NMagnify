@@ -36,10 +36,57 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Caliburn.Micro">
+      <HintPath>..\..\packages\Caliburn.Micro-Contrib.1.0.2\lib\Net40\Caliburn.Micro.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Micro.Contrib">
+      <HintPath>..\..\packages\Caliburn.Micro-Contrib.1.0.2\lib\Net40\Caliburn.Micro.Contrib.dll</HintPath>
+    </Reference>
+    <Reference Include="DesignTimeProperties.WPF">
+      <HintPath>..\..\packages\Caliburn.Micro-Contrib.1.0.2\lib\Net40\DesignTimeProperties.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="LightCore">
+      <HintPath>..\..\packages\LightCore.1.4.1\lib\NET40\LightCore.dll</HintPath>
+    </Reference>
+    <Reference Include="LightCore.CommonServiceLocator">
+      <HintPath>..\..\packages\LightCore.1.4.1\lib\NET40\LightCore.CommonServiceLocator.dll</HintPath>
+    </Reference>
+    <Reference Include="LightCore.Configuration">
+      <HintPath>..\..\packages\LightCore.1.4.1\lib\NET40\LightCore.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro">
+      <HintPath>..\..\packages\MahApps.Metro.0.7.2.0\lib\net40\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\..\packages\LightCore.1.4.1\lib\NET40\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MahApps.Metro.0.7.2.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -61,8 +108,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\ShellViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="ViewModels\IShell.cs" />
+    <Compile Include="Model\BitmapScreenCapturer.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -81,16 +134,19 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Model\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
+    <Page Include="Views\ShellView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -100,4 +156,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <UsingTask TaskName="NotifyPropertyWeaverMsBuildTask.WeavingTask" AssemblyFile="$(SolutionDir)Tools\NotifyPropertyWeaverMsBuildTask.dll" />
+  <Target Name="AfterCompile">
+    <NotifyPropertyWeaverMsBuildTask.WeavingTask />
+  </Target>
 </Project>
