@@ -15,9 +15,6 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid Background="White">
-        <Image HorizontalAlignment="Stretch"
-               VerticalAlignment="Stretch"
-               Source="{Binding Capture}"
-               Stretch="Uniform" />
+    
     </Grid>
 </Controls:MetroWindow>

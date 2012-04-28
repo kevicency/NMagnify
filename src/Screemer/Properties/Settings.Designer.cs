@@ -22,5 +22,53 @@ namespace Screemer.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public double CapturedScreenView_Width {
+            get {
+                return ((double)(this["CapturedScreenView_Width"]));
+            }
+            set {
+                this["CapturedScreenView_Width"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public double CapturedScreenView_Height {
+            get {
+                return ((double)(this["CapturedScreenView_Height"]));
+            }
+            set {
+                this["CapturedScreenView_Height"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double CapturedScreenView_Left {
+            get {
+                return ((double)(this["CapturedScreenView_Left"]));
+            }
+            set {
+                this["CapturedScreenView_Left"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public double CapturedScreenView_Top {
+            get {
+                return ((double)(this["CapturedScreenView_Top"]));
+            }
+            set {
+                this["CapturedScreenView_Top"] = value;
+            }
+        }
     }
 }

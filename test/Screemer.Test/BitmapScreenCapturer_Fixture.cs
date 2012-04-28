@@ -23,7 +23,7 @@ namespace Screemer.Test
         [SetUp]
         public void SetUp()
         {
-            Sut = new BitmapScreenCapturer(Dispatcher.CurrentDispatcher);
+            Sut = new BitmapScreenCapturer();
 
             Sut.ScreenCaptured += (sender, args) => CapturedImage = args.CapturedImage;
         }
@@ -64,13 +64,35 @@ namespace Screemer.Test
         }
 
         [Test]
-        public void TransformBitmapToSource_CreatesAnImageSource()
+        public void CaptureAndSleep_SleepsAsLongAsNeededToGetDesiredCapturesPerSecond()
+        {
+            Sut.CapturesPerSecond = 10;
+            Sut.ScreenRegion = new Rectangle(0, 0, 1, 1);
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
+
+            for (int i = 0; i < Sut.CapturesPerSecond; i++)
+            {
+                Sut.CaptureAndSleep();
+            }
+
+            sw.Stop();
+            sw.ElapsedMilliseconds.Should().Be.InRange(950l, 1050l);
+        }
+    }
+
+
+    [TestFixture]
+    public class BitmapUtility_Fixture
+    {
+        [Test]
+        public void ConvertBitmapToImageSource_CreatesAnImageSource()
         {
             using (var image = Image.FromFile(@".\Assets\testimage.jpg"))
             {
                 using (var bitmap = new Bitmap(image))
                 {
-                    var source = Sut.TransformBitmapToSource(bitmap);
+                    var source = BitmapUtility.ConvertBitmapToImageSource(bitmap);
                     Array pixels = new byte[16];
                     source.CopyPixels(pixels, 8, 0);
 
@@ -96,23 +118,6 @@ namespace Screemer.Test
                     pixels.GetValue(15).Should().Equal((byte)255);
                 }
             }
-        }
-
-        [Test]
-        public void CaptureAndSleep_SleepsAsLongAsNeededToGetDesiredCapturesPerSecond()
-        {
-            Sut.CapturesPerSecond = 10;
-            Sut.ScreenRegion = new Rectangle(0, 0, 1, 1);
-            Stopwatch sw = new Stopwatch();
-            sw.Start();
-
-            for (int i = 0; i < Sut.CapturesPerSecond; i++)
-            {
-                Sut.CaptureAndSleep();
-            }
-
-            sw.Stop();
-            sw.ElapsedMilliseconds.Should().Be.InRange(950l, 1050l);
         }
     }
 }

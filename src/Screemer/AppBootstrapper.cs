@@ -31,7 +31,8 @@ namespace Screemer
 		    builder.Register<ShellView>();
 		    builder.Register<Dispatcher>(c => c.Resolve<ShellView>().Dispatcher);
 
-		    builder.Register<IScreenCapturer, BitmapScreenCapturer>();
+		    builder.Register<IScreenCapturer, BitmapScreenCapturer>().ControlledBy<TransientLifecycle>();
+		    builder.Register<BitmapScreenCapturer>().ControlledBy<TransientLifecycle>();
 
 		    _container = builder.Build();
 		}

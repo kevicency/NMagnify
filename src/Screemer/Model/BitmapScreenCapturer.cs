@@ -2,48 +2,22 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
-using System.Runtime.InteropServices;
 using System.Threading;
-using System.Windows;
-using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Threading;
-using Point = System.Drawing.Point;
 
 namespace Screemer.Model
 {
-    public class ScreenCapturedEventArgs : EventArgs
-    {
-        public ScreenCapturedEventArgs(ImageSource capture)
-        {
-            CapturedImage = capture;
-        }
-
-        public ImageSource CapturedImage { get; private set; }
-    }
-
-    public interface IScreenCapturer
-    {
-        int CapturesPerSecond { get; set; }
-        Rectangle ScreenRegion { get; set; }
-
-        bool IsRunning { get; }
-        event EventHandler<ScreenCapturedEventArgs> ScreenCaptured;
-
-        void Start();
-        void Stop();
-    }
-
     public class BitmapScreenCapturer : IScreenCapturer
     {
-        readonly Dispatcher _dispatcher;
         BackgroundWorker _worker;
 
-        public BitmapScreenCapturer(Dispatcher dispatcher)
+        public BitmapScreenCapturer()
         {
-            _dispatcher = dispatcher;
+            BitmapConverter = BitmapUtility.ConvertBitmapToImageSource;
         }
+
+        public BitmapToImageSource BitmapConverter { get; set; }
 
         #region IScreenCapturer Members
 
@@ -80,14 +54,14 @@ namespace Screemer.Model
 
         #endregion
 
-        internal BitmapSource CaptureAndSleep()
+        internal ImageSource CaptureAndSleep()
         {
             var timer = new Stopwatch();
 
             timer.Restart();
             using (var bitmap = CaptureScreen())
             {
-                var capture = TransformBitmapToSource(bitmap);
+                var capturedImage = BitmapConverter(bitmap);
 
                 if (CapturesPerSecond != 0)
                 {
@@ -98,7 +72,7 @@ namespace Screemer.Model
                     }
                 }
 
-                return capture;
+                return capturedImage;
             }
         }
 
@@ -111,10 +85,6 @@ namespace Screemer.Model
             }
         }
 
-        [DllImport("gdi32.dll")]
-        public static extern bool DeleteObject(IntPtr hObject);
-
-
         internal Bitmap CaptureScreen()
         {
             var bitmap = new Bitmap(ScreenRegion.Width, ScreenRegion.Height);
@@ -125,27 +95,6 @@ namespace Screemer.Model
             }
 
             return bitmap;
-        }
-
-        internal BitmapSource TransformBitmapToSource(Bitmap bitmap)
-        {
-            IntPtr hBitmap = bitmap.GetHbitmap();
-            BitmapSource source = null;
-
-            //Action dispatcherDelegate = () =>
-            //{
-                source = Imaging.CreateBitmapSourceFromHBitmap(
-                    hBitmap,
-                    IntPtr.Zero,
-                    Int32Rect.Empty,
-                    BitmapSizeOptions.FromEmptyOptions());
-            //};
-            //var dispatcherOperation = _dispatcher.BeginInvoke(dispatcherDelegate);
-            //dispatcherOperation.Wait();
-
-            DeleteObject(hBitmap);
-
-            return source;
         }
     }
 }

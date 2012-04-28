@@ -108,7 +108,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="BitmapUtility.cs" />
+    <Compile Include="Model\BitmapToImageSource.cs" />
+    <Compile Include="Model\IScreenCapturer.cs" />
+    <Compile Include="Model\ScreenCapturedEventArgs.cs" />
+    <Compile Include="ViewModels\CapturedScreenViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="Views\CapturedScreenView.xaml.cs">
+      <DependentUpon>CapturedScreenView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppBootstrapper.cs" />
@@ -143,6 +151,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Views\CapturedScreenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ShellView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
