@@ -121,6 +121,8 @@
     <Compile Include="Model\IProfileManager.cs" />
     <Compile Include="Model\IScreenCapturer.cs" />
     <Compile Include="Model\Profile.cs" />
+    <Compile Include="Model\ProfileEventArgs.cs" />
+    <Compile Include="Model\ProfileManager.cs" />
     <Compile Include="Model\ScreenCapturedEventArgs.cs" />
     <Compile Include="Model\ScreenRegion.cs" />
     <Compile Include="Model\ScreenRegionSelectedEventArgs.cs" />
