@@ -80,10 +80,14 @@
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\..\packages\LightCore.1.4.1\lib\NET40\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\packages\Newtonsoft.Json.4.5.4\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\packages\MahApps.Metro.0.7.2.0\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -112,10 +116,15 @@
     <Compile Include="Model\BitmapToImageSource.cs" />
     <Compile Include="Model\IScreenCapturer.cs" />
     <Compile Include="Model\ScreenCapturedEventArgs.cs" />
+    <Compile Include="Model\ScreenRegionSelectedEventArgs.cs" />
     <Compile Include="ViewModels\CapturedScreenViewModel.cs" />
+    <Compile Include="ViewModels\SelectScreenRegionViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\CapturedScreenView.xaml.cs">
       <DependentUpon>CapturedScreenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectScreenRegionView.xaml.cs">
+      <DependentUpon>SelectScreenRegionView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -152,6 +161,10 @@
   <ItemGroup />
   <ItemGroup>
     <Page Include="Views\CapturedScreenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SelectScreenRegionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
