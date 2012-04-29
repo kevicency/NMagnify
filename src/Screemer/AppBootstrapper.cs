@@ -28,8 +28,10 @@ namespace Screemer
 		    builder.Register<IEventAggregator, EventAggregator>();
 
 		    builder.Register<IShell, ShellViewModel>();
+		    builder.Register<ISelectScreenRegion, SelectScreenRegionView>().ControlledBy<TransientLifecycle>();
 		    builder.Register<ShellView>();
 		    builder.Register<CapturedScreenViewModel>();
+		    builder.Register<ScreenRegionSettingsViewModel>();
 
 		    builder.Register<IScreenCapturer>(c => c.Resolve<BitmapScreenCapturer>());
 		    builder.Register<BitmapScreenCapturer>();

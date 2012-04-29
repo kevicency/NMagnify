@@ -14,7 +14,10 @@ namespace Screemer.Views
 {
     public interface ISelectScreenRegion
     {
+        event EventHandler SelectionCancelled; 
         event EventHandler<ScreenRegionSelectedEventArgs> ScreenRegionSelected;
+
+        void Show();
     }
 
     /// <summary>
@@ -61,6 +64,7 @@ namespace Screemer.Views
                 if (args.Key == Key.Escape)
                 {
                     Close();
+                    OnSelectionCancelled(EventArgs.Empty);
                 }
             };
 
@@ -86,6 +90,17 @@ namespace Screemer.Views
         }
 
         #region ISelectScreenRegion Members
+
+        public event EventHandler SelectionCancelled;
+
+        public void OnSelectionCancelled(EventArgs e)
+        {
+            EventHandler handler = SelectionCancelled;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
 
         public event EventHandler<ScreenRegionSelectedEventArgs> ScreenRegionSelected;
 

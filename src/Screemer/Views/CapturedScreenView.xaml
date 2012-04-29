@@ -5,8 +5,6 @@
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                       Title="CapturedScreenView"
-                      Width="300"
-                      Height="300"
                       Background="WhiteSmoke"
                       MouseLeftButtonDown="DragMoveWindow"
                       ShowTitleBar="False">

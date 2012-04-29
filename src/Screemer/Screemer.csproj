@@ -102,6 +102,9 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit.Extended">
+      <HintPath>..\..\packages\Extended.Wpf.Toolkit.1.6.0\lib\net40\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -118,11 +121,15 @@
     <Compile Include="Model\ScreenCapturedEventArgs.cs" />
     <Compile Include="Model\ScreenRegion.cs" />
     <Compile Include="Model\ScreenRegionSelectedEventArgs.cs" />
+    <Compile Include="Result\SelectScreenRegionResult.cs" />
     <Compile Include="ViewModels\CapturedScreenViewModel.cs" />
-    <Compile Include="ViewModels\SelectScreenRegionViewModel.cs" />
+    <Compile Include="ViewModels\ScreenRegionSettingsViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\CapturedScreenView.xaml.cs">
       <DependentUpon>CapturedScreenView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ScreenRegionSettingsView.xaml.cs">
+      <DependentUpon>ScreenRegionSettingsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SelectScreenRegionView.xaml.cs">
       <DependentUpon>SelectScreenRegionView.xaml</DependentUpon>
@@ -162,6 +169,10 @@
   <ItemGroup />
   <ItemGroup>
     <Page Include="Views\CapturedScreenView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ScreenRegionSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Threading;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -15,6 +16,7 @@ namespace Screemer.Model
         public BitmapScreenCapturer()
         {
             BitmapConverter = BitmapUtility.ConvertBitmapToImageSource;
+            ScreenRegion = new ScreenRegion(0,0,0,0);
         }
 
         public BitmapToImageSource BitmapConverter { get; set; }
@@ -61,6 +63,7 @@ namespace Screemer.Model
             timer.Restart();
             using (var bitmap = CaptureScreen())
             {
+                bitmap.Save("c:\\foo\\" + DateTime.Now.Ticks + ".jpg", ImageFormat.Jpeg);
                 var capturedImage = BitmapConverter(bitmap);
 
                 if (CapturesPerSecond != 0)
@@ -91,7 +94,7 @@ namespace Screemer.Model
 
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
-                graphics.CopyFromScreen(new Point(ScreenRegion.Left, ScreenRegion.Right),
+                graphics.CopyFromScreen(new Point(ScreenRegion.Left, ScreenRegion.Top),
                     new Point(0, 0),
                     new Size(ScreenRegion.Width, ScreenRegion.Height));
             }
