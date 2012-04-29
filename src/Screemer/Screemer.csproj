@@ -116,6 +116,7 @@
     <Compile Include="Model\BitmapToImageSource.cs" />
     <Compile Include="Model\IScreenCapturer.cs" />
     <Compile Include="Model\ScreenCapturedEventArgs.cs" />
+    <Compile Include="Model\ScreenRegion.cs" />
     <Compile Include="Model\ScreenRegionSelectedEventArgs.cs" />
     <Compile Include="ViewModels\CapturedScreenViewModel.cs" />
     <Compile Include="ViewModels\SelectScreenRegionViewModel.cs" />

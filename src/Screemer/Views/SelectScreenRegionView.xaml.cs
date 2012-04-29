@@ -76,8 +76,8 @@ namespace Screemer.Views
                 {
                     _secondSelection = pos;
 
-                    var rectangle = GetRectangle(_firstSelection.Value, _secondSelection.Value);
-                    OnScreenRegionSelected(new ScreenRegionSelectedEventArgs(rectangle));
+                    var region = new ScreenRegion(_firstSelection.Value, _secondSelection.Value);
+                    OnScreenRegionSelected(new ScreenRegionSelectedEventArgs(region));
                     Close();
                 }
             };
@@ -102,22 +102,13 @@ namespace Screemer.Views
 
         void DrawSelection(Point p1, Point p2)
         {
-            var rectangle = GetRectangle(p1, p2);
+            var region = new ScreenRegion(p1, p2);
 
-            Canvas.SetLeft(selection, rectangle.X);
-            Canvas.SetTop(selection, rectangle.Y);
-            selection.Width = Math.Abs(rectangle.Width);
-            selection.Height = Math.Abs(rectangle.Height);
+            Canvas.SetLeft(selection, region.Left);
+            Canvas.SetTop(selection, region.Top);
+            selection.Width = Math.Abs(region.Width);
+            selection.Height = Math.Abs(region.Height);
             selection.Visibility = Visibility.Visible;
-        }
-
-        Rectangle GetRectangle(Point p1, Point p2)
-        {
-            var x = (int) Math.Min(p1.X, p2.X);
-            var y = (int) Math.Min(p1.Y, p2.Y);
-            var width = (int) Math.Abs(p1.X - p2.X);
-            var height = (int) Math.Abs(p1.Y - p2.Y);
-            return new Rectangle(x, y, width, height);
         }
 
         void ResetSelection()

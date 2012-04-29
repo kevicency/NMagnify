@@ -5,11 +5,11 @@ namespace Screemer.Model
 {
     public class ScreenRegionSelectedEventArgs : EventArgs
     {
-        public ScreenRegionSelectedEventArgs(Rectangle selectedRegion)
+        public ScreenRegionSelectedEventArgs(ScreenRegion selectedRegion)
         {
             SelectedRegion = selectedRegion;
         }
 
-        public Rectangle SelectedRegion { get; private set; }
+        public ScreenRegion SelectedRegion { get; private set; }
     }
 }

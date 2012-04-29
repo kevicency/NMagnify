@@ -11,12 +11,8 @@ namespace Screemer.ViewModels
             CapturedScreen.DeactivateWith(this);
         }
 
-        protected override void OnActivate()
-        {
-            base.OnActivate();
-            IoC.Get<IWindowManager>().ShowWindow(new SelectScreenRegionViewModel());
-        }
-
         public CapturedScreenViewModel CapturedScreen { get; private set; }
+
+
     }
 }

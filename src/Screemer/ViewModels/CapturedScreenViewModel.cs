@@ -17,7 +17,6 @@ namespace Screemer.ViewModels
             _screenCapturer = screenCapturer;
             _windowManager = windowManager;
 
-            _screenCapturer.ScreenRegion = new Rectangle(1620, 785, 290, 290);
             _screenCapturer.CapturesPerSecond = 25;
             _screenCapturer.ScreenCaptured += (sender, args) => { CapturedImage = args.CapturedImage; };
 

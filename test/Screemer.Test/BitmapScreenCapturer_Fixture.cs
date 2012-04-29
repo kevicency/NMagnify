@@ -36,7 +36,7 @@ namespace Screemer.Test
             var width = 20;
             var height = 30;
 
-            Sut.ScreenRegion = new Rectangle(0, 0, width, height);
+            Sut.ScreenRegion = new ScreenRegion(0, 0, width, height);
 
             using (var bitmap = Sut.CaptureScreen())
             {
@@ -49,7 +49,7 @@ namespace Screemer.Test
         public void CaptureImage_CapturesCorrectScreenRegion()
         {
             // 20 pixel rectangle on the top left of screen
-            Sut.ScreenRegion = new Rectangle(0, 0, 20, 20);
+            Sut.ScreenRegion = new ScreenRegion(0, 0, 20, 20);
 
             using(var bitmap = Sut.CaptureScreen())
             {
@@ -67,7 +67,7 @@ namespace Screemer.Test
         public void CaptureAndSleep_SleepsAsLongAsNeededToGetDesiredCapturesPerSecond()
         {
             Sut.CapturesPerSecond = 10;
-            Sut.ScreenRegion = new Rectangle(0, 0, 1, 1);
+            Sut.ScreenRegion = new ScreenRegion(0, 0, 1, 1);
             Stopwatch sw = new Stopwatch();
             sw.Start();
 

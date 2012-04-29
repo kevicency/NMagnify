@@ -24,7 +24,7 @@ namespace Screemer.Model
         public event EventHandler<ScreenCapturedEventArgs> ScreenCaptured;
 
         public int CapturesPerSecond { get; set; }
-        public Rectangle ScreenRegion { get; set; }
+        public ScreenRegion ScreenRegion { get; set; }
 
         public bool IsRunning { get; private set; }
 
@@ -87,11 +87,13 @@ namespace Screemer.Model
 
         internal Bitmap CaptureScreen()
         {
-            var bitmap = new Bitmap(ScreenRegion.Width, ScreenRegion.Height);
+            var bitmap = new Bitmap((int) ScreenRegion.Width, (int) ScreenRegion.Height);
 
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
-                graphics.CopyFromScreen(ScreenRegion.Location, new Point(0, 0), ScreenRegion.Size);
+                graphics.CopyFromScreen(new Point(ScreenRegion.Left, ScreenRegion.Right),
+                    new Point(0, 0),
+                    new Size(ScreenRegion.Width, ScreenRegion.Height));
             }
 
             return bitmap;
