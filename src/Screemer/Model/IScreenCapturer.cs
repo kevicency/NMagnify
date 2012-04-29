@@ -5,7 +5,7 @@ namespace Screemer.Model
     public interface IScreenCapturer
     {
         int CapturesPerSecond { get; set; }
-        ScreenRegion ScreenRegion { get; set; }
+        Func<ScreenRegion> CaptureRegionResolver { get; set; }
 
         bool IsRunning { get; }
         event EventHandler<ScreenCapturedEventArgs> ScreenCaptured;

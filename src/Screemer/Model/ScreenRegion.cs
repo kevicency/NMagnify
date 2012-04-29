@@ -20,6 +20,10 @@ namespace Screemer.Model
             get { return Bottom - Top; }
         }
 
+        public ScreenRegion()
+        {
+        }
+
         public ScreenRegion(int x1, int y1, int x2, int y2)
         {
             Left = Math.Min(x1, x2);
@@ -31,5 +35,12 @@ namespace Screemer.Model
         public ScreenRegion(Point p1, Point p2)
             : this((int) p1.X, (int) p1.Y, (int) p2.X, (int) p2.Y)
         { }
+
+        public ScreenRegion Clone()
+        {
+            return new ScreenRegion(
+                    Left, Top, Right, Bottom
+                );
+        }
     }
 }

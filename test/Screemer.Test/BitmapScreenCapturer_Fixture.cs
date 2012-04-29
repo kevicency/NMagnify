@@ -10,11 +10,38 @@ using System.Threading;
 using System.Windows.Media;
 using System.Windows.Threading;
 using NUnit.Framework;
+using Newtonsoft.Json;
 using Screemer.Model;
 using Should.Fluent;
 
 namespace Screemer.Test
 {
+    [TestFixture]
+    public class Profile_Fixture
+    {
+        Profile Sut;
+
+        [SetUp]
+        public void SetUp()
+        {
+            Sut = new Profile();
+        }
+
+        [Test]
+        public void Serialize()
+        {
+            Sut.Guid = Guid.NewGuid();
+            Sut.CaptureRegion.Left = 1;
+            Sut.CaptureRegion.Top = 2;
+            Sut.CaptureRegion.Right = 3;
+            Sut.CaptureRegion.Bottom = 4;
+
+            var json = JsonConvert.SerializeObject(Sut);
+            var profile = JsonConvert.DeserializeObject<Profile>(json);
+            Console.WriteLine(profile);
+        }
+ 
+    }
     [TestFixture]
     public class BitmapScreenCapturer_Fixture
     {
@@ -36,7 +63,7 @@ namespace Screemer.Test
             var width = 20;
             var height = 30;
 
-            Sut.ScreenRegion = new ScreenRegion(0, 0, width, height);
+            Sut.CaptureRegionResolver = () => new ScreenRegion(0, 0, width, height);
 
             using (var bitmap = Sut.CaptureScreen())
             {
@@ -49,7 +76,7 @@ namespace Screemer.Test
         public void CaptureImage_CapturesCorrectScreenRegion()
         {
             // 20 pixel rectangle on the top left of screen
-            Sut.ScreenRegion = new ScreenRegion(0, 0, 20, 20);
+            Sut.CaptureRegionResolver = () => new ScreenRegion(0, 0, 20, 20);
 
             using(var bitmap = Sut.CaptureScreen())
             {
@@ -67,7 +94,7 @@ namespace Screemer.Test
         public void CaptureAndSleep_SleepsAsLongAsNeededToGetDesiredCapturesPerSecond()
         {
             Sut.CapturesPerSecond = 10;
-            Sut.ScreenRegion = new ScreenRegion(0, 0, 1, 1);
+            Sut.CaptureRegionResolver = () => new ScreenRegion(0, 0, 1, 1);
             Stopwatch sw = new Stopwatch();
             sw.Start();
 
@@ -77,7 +104,7 @@ namespace Screemer.Test
             }
 
             sw.Stop();
-            sw.ElapsedMilliseconds.Should().Be.InRange(950l, 1050l);
+            sw.ElapsedMilliseconds.Should().Be.InRange(950L, 1050L);
         }
     }
 

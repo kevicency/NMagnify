@@ -27,7 +27,8 @@
         </LinearGradientBrush>
     </Window.Background>
     <StackPanel>
-        <ContentControl x:Name="ScreenRegionSettings" Margin="{StaticResource ContentMargin}" />
+        <ContentControl x:Name="SelectProfile" Margin="{StaticResource ContentMargin}" />
+        <ContentControl x:Name="CaptureRegionSettings" Margin="{StaticResource ContentMargin}" />
         <Button x:Name="ShowCapturedScreen"
                 Margin="{StaticResource ContentMargin}"
                 Content="Show" />

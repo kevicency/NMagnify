@@ -116,23 +116,30 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BitmapUtility.cs" />
+    <Compile Include="IActiveProfileProvider.cs" />
     <Compile Include="Model\BitmapToImageSource.cs" />
+    <Compile Include="Model\IProfileManager.cs" />
     <Compile Include="Model\IScreenCapturer.cs" />
+    <Compile Include="Model\Profile.cs" />
     <Compile Include="Model\ScreenCapturedEventArgs.cs" />
     <Compile Include="Model\ScreenRegion.cs" />
     <Compile Include="Model\ScreenRegionSelectedEventArgs.cs" />
-    <Compile Include="Result\SelectScreenRegionResult.cs" />
-    <Compile Include="ViewModels\CapturedScreenViewModel.cs" />
-    <Compile Include="ViewModels\ScreenRegionSettingsViewModel.cs" />
+    <Compile Include="Results\SelectCaptureRegionResult.cs" />
+    <Compile Include="ViewModels\PlaybackViewModel.cs" />
+    <Compile Include="ViewModels\CaptureRegionSettingsViewModel.cs" />
+    <Compile Include="ViewModels\SelectProfileViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
-    <Compile Include="Views\CapturedScreenView.xaml.cs">
-      <DependentUpon>CapturedScreenView.xaml</DependentUpon>
+    <Compile Include="Views\PlaybackView.xaml.cs">
+      <DependentUpon>PlaybackView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ScreenRegionSettingsView.xaml.cs">
-      <DependentUpon>ScreenRegionSettingsView.xaml</DependentUpon>
+    <Compile Include="Views\CaptureRegionSettingsView.xaml.cs">
+      <DependentUpon>CaptureRegionSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SelectScreenRegionView.xaml.cs">
-      <DependentUpon>SelectScreenRegionView.xaml</DependentUpon>
+    <Compile Include="Views\SelectCaptureRegionOverlay.xaml.cs">
+      <DependentUpon>SelectCaptureRegionOverlay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectProfileView.xaml.cs">
+      <DependentUpon>SelectProfileView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -168,15 +175,19 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Page Include="Views\CapturedScreenView.xaml">
+    <Page Include="Views\PlaybackView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ScreenRegionSettingsView.xaml">
+    <Page Include="Views\CaptureRegionSettingsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SelectScreenRegionView.xaml">
+    <Page Include="Views\SelectCaptureRegionOverlay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SelectProfileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -193,8 +204,8 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <UsingTask TaskName="NotifyPropertyWeaverMsBuildTask.WeavingTask" AssemblyFile="$(SolutionDir)Tools\NotifyPropertyWeaverMsBuildTask.dll" />
   <Target Name="AfterCompile">
     <NotifyPropertyWeaverMsBuildTask.WeavingTask />
   </Target>
+  <UsingTask TaskName="NotifyPropertyWeaverMsBuildTask.WeavingTask" AssemblyFile="$(SolutionDir)Tools\NotifyPropertyWeaverMsBuildTask.dll" />
 </Project>

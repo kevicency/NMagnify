@@ -16,7 +16,7 @@ namespace Screemer.Model
         public BitmapScreenCapturer()
         {
             BitmapConverter = BitmapUtility.ConvertBitmapToImageSource;
-            ScreenRegion = new ScreenRegion(0,0,0,0);
+            CaptureRegionResolver = () => new ScreenRegion();
         }
 
         public BitmapToImageSource BitmapConverter { get; set; }
@@ -26,7 +26,7 @@ namespace Screemer.Model
         public event EventHandler<ScreenCapturedEventArgs> ScreenCaptured;
 
         public int CapturesPerSecond { get; set; }
-        public ScreenRegion ScreenRegion { get; set; }
+        public Func<ScreenRegion> CaptureRegionResolver { get; set; }
 
         public bool IsRunning { get; private set; }
 
@@ -63,7 +63,6 @@ namespace Screemer.Model
             timer.Restart();
             using (var bitmap = CaptureScreen())
             {
-                bitmap.Save("c:\\foo\\" + DateTime.Now.Ticks + ".jpg", ImageFormat.Jpeg);
                 var capturedImage = BitmapConverter(bitmap);
 
                 if (CapturesPerSecond != 0)
@@ -90,16 +89,21 @@ namespace Screemer.Model
 
         internal Bitmap CaptureScreen()
         {
-            var bitmap = new Bitmap((int) ScreenRegion.Width, (int) ScreenRegion.Height);
-
-            using (Graphics graphics = Graphics.FromImage(bitmap))
+            var region = CaptureRegionResolver();
+            if (region != null)
             {
-                graphics.CopyFromScreen(new Point(ScreenRegion.Left, ScreenRegion.Top),
-                    new Point(0, 0),
-                    new Size(ScreenRegion.Width, ScreenRegion.Height));
-            }
+                var bitmap = new Bitmap((int) region.Width, (int) region.Height);
 
-            return bitmap;
+                using (Graphics graphics = Graphics.FromImage(bitmap))
+                {
+                    graphics.CopyFromScreen(new Point(region.Left, region.Top),
+                        new Point(0, 0),
+                        new Size(region.Width, region.Height));
+                }
+
+                return bitmap;
+            }
+            return new Bitmap(1,1);
         }
     }
 }

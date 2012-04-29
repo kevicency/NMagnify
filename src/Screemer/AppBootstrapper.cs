@@ -28,13 +28,17 @@ namespace Screemer
 		    builder.Register<IEventAggregator, EventAggregator>();
 
 		    builder.Register<IShell, ShellViewModel>();
-		    builder.Register<ISelectScreenRegion, SelectScreenRegionView>().ControlledBy<TransientLifecycle>();
+		    builder.Register<ISelectCaptureRegion, SelectCaptureRegionOverlay>().ControlledBy<TransientLifecycle>();
 		    builder.Register<ShellView>();
-		    builder.Register<CapturedScreenViewModel>();
-		    builder.Register<ScreenRegionSettingsViewModel>();
+		    builder.Register<PlaybackViewModel>();
+		    builder.Register<CaptureRegionSettingsViewModel>();
+		    builder.Register<SelectProfileViewModel>();
+		    builder.Register<IActiveProfileProvider>(c => c.Resolve<SelectProfileViewModel>());
 
 		    builder.Register<IScreenCapturer>(c => c.Resolve<BitmapScreenCapturer>());
 		    builder.Register<BitmapScreenCapturer>();
+		    builder.Register<IProfileManager, ProfileManager>();
+		    builder.Register<Func<Profile>>(c => () => c.Resolve<SelectProfileViewModel>().ActiveProfile);
 
 		    _container = builder.Build();
 		}
