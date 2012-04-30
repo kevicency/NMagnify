@@ -5,10 +5,14 @@ namespace NMagnify.ViewModels
 {
     public class ShellViewModel : Screen, IShell
     {
+        readonly IWindowManager _windowManager;
+
         public ShellViewModel(PlaybackStreamViewModel playbackStream,
                               CaptureRegionSettingsViewModel captureRegionSettings,
-                              ProfileManagerViewModel profileManager)
+                              ProfileManagerViewModel profileManager,
+            IWindowManager windowManager)
         {
+            _windowManager = windowManager;
             DisplayName = App.Name;
             PlaybackStream = playbackStream;
             CaptureRegionSettings = captureRegionSettings;
@@ -23,11 +27,9 @@ namespace NMagnify.ViewModels
         public CaptureRegionSettingsViewModel CaptureRegionSettings { get; private set; }
         public ProfileManagerViewModel ProfileManager { get; set; }
 
-        public IEnumerable<IResult> ShowCapturedScreen()
+        public void ShowAbout()
         {
-            PlaybackStream.Show();
-
-            yield break;
+            _windowManager.ShowDialog(new AboutViewModel());
         }
     }
 }

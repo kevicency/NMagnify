@@ -116,7 +116,6 @@
         </Setter>
     </Style>
 
-
     <Style x:Key="MetroSpinner" TargetType="{x:Type xctk:ButtonSpinner}">
         <Setter Property="Background" Value="{DynamicResource GrayBrush7}" />
         <Setter Property="Focusable" Value="False" />
@@ -219,4 +218,8 @@
         </Setter>
     </Style>
 
+    <LinearGradientBrush x:Key="WindowGradientBrush" MappingMode="Absolute" StartPoint="0,0" EndPoint="0,150">
+        <GradientStop Color="#FFDEDEDE" />
+        <GradientStop Offset="1" Color="White" />
+    </LinearGradientBrush>
 </ResourceDictionary>

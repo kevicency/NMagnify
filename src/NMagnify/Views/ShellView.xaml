@@ -5,15 +5,17 @@
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       Width="300"
                       MinWidth="300"
+                      Background="{StaticResource WindowGradientBrush}"
                       Icon="..\nmagnify.ico"
                       ShowIconOnTitleBar="True"
                       SizeToContent="Height">
-    <Window.Background>
-        <LinearGradientBrush MappingMode="Absolute" StartPoint="0,0" EndPoint="0,150">
-            <GradientStop Color="#FFDEDEDE" />
-            <GradientStop Offset="1" Color="White" />
-        </LinearGradientBrush>
-    </Window.Background>
+    <Controls:MetroWindow.WindowCommands>
+        <Controls:WindowCommands>
+            <Button cal:Message.Attach="ShowAbout">
+                <TextBlock FontWeight="Bold" Text="?" />
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.WindowCommands>
     <StackPanel>
         <HeaderedContentControl Header="Profile" Style="{StaticResource SectionControl}">
             <ContentControl x:Name="ProfileManager" />

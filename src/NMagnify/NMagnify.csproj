@@ -118,6 +118,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ApplicationInformation.cs" />
     <Compile Include="BitmapUtility.cs" />
     <Compile Include="Converters\DialogColorConverter.cs" />
     <Compile Include="IActiveProfileProvider.cs" />
@@ -136,6 +137,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Results\SelectCaptureRegionResult.cs" />
+    <Compile Include="ViewModels\AboutViewModel.cs" />
+    <Compile Include="Views\AboutView.xaml.cs">
+      <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dialog\EditProfileDialog.cs" />
     <Compile Include="ViewModels\PlaybackStreamViewModel.cs" />
     <Compile Include="ViewModels\CaptureRegionSettingsViewModel.cs" />
@@ -165,7 +170,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppBootstrapper.cs" />
-    <Compile Include="ViewModels\IShell.cs" />
+    <Compile Include="IShell.cs" />
     <Compile Include="Model\BitmapScreenCapturer.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -203,6 +208,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Resources\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AboutView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
