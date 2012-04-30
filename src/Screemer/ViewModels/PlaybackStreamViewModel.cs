@@ -5,14 +5,14 @@ using Screemer.Views;
 
 namespace Screemer.ViewModels
 {
-    public class PlaybackViewModel : Screen
+    public class PlaybackStreamViewModel : Screen
     {
         readonly IActiveProfileProvider _activeProfileProvider;
         readonly IScreenCapturer _screenCapturer;
         readonly IWindowManager _windowManager;
-        PlaybackView _view;
+        PlaybackStreamView _streamView;
 
-        public PlaybackViewModel(IScreenCapturer screenCapturer,
+        public PlaybackStreamViewModel(IScreenCapturer screenCapturer,
                                  IWindowManager windowManager,
                                  IActiveProfileProvider activeProfileProvider)
         {
@@ -54,10 +54,10 @@ namespace Screemer.ViewModels
         protected override void OnViewAttached(object view, object context)
         {
             base.OnViewAttached(view, context);
-            _view = view as PlaybackView;
+            _streamView = view as PlaybackStreamView;
             if (_screenCapturer is BitmapScreenCapturer)
             {
-                var dispatcher = _view.Dispatcher;
+                var dispatcher = _streamView.Dispatcher;
                 (_screenCapturer as BitmapScreenCapturer).BitmapConverter =
                     x => BitmapUtility.ConvertBitmapToImageSourceOnDispatcher(x, dispatcher);
             }
@@ -66,10 +66,10 @@ namespace Screemer.ViewModels
         protected override void OnViewLoaded(object view)
         {
             base.OnViewLoaded(view);
-            _view.Width = PlaybackRegion.Width;
-            _view.Height = PlaybackRegion.Height;
-            _view.Left = PlaybackRegion.Left;
-            _view.Top = PlaybackRegion.Top;
+            _streamView.Width = PlaybackRegion.Width;
+            _streamView.Height = PlaybackRegion.Height;
+            _streamView.Left = PlaybackRegion.Left;
+            _streamView.Top = PlaybackRegion.Top;
         }
 
         protected override void OnActivate()
@@ -82,13 +82,14 @@ namespace Screemer.ViewModels
         {
             base.OnDeactivate(close);
             _screenCapturer.Stop();
-            if (close && _view != null)
+            if (close && _streamView != null)
             {
-                PlaybackRegion.Left = (int) _view.Left;
-                PlaybackRegion.Top = (int) _view.Top;
-                PlaybackRegion.Right = PlaybackRegion.Left + (int)_view.Width;
-                PlaybackRegion.Bottom = PlaybackRegion.Top + (int)_view.Height;
-                _view = null;
+                PlaybackRegion.Left = (int) _streamView.Left;
+                PlaybackRegion.Top = (int) _streamView.Top;
+                PlaybackRegion.Right = PlaybackRegion.Left + (int)_streamView.Width;
+                PlaybackRegion.Bottom = PlaybackRegion.Top + (int)_streamView.Height;
+                _streamView = null;
+                CanShow = true;
             }
         }
 
@@ -105,8 +106,8 @@ namespace Screemer.ViewModels
         {
             if (IsActive)
             {
-                _view.Close();
-                _view = null;
+                _streamView.Close();
+                _streamView = null;
                 CanShow = true;
             }
         }

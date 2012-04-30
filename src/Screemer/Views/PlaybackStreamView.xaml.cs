@@ -11,28 +11,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using Screemer.Model;
 using Screemer.Properties;
 
 namespace Screemer.Views
 {
     /// <summary>
-    /// Interaction logic for CapturedScreenView.xaml
+    /// Interaction logic for PlaybackStreamView.xaml
     /// </summary>
-    public partial class CapturedScreenView : MetroWindow
+    public partial class PlaybackStreamView : MetroWindow
     {
-        public CapturedScreenView()
+        public PlaybackStreamView()
         {
             InitializeComponent();
-
-            Loaded += (sender, args) =>
-            {
-                LoadSettings();
-            };
-
-            Closing += (sender, args) =>
-            {
-                SaveSettings();
-            };
         }
 
         void DragMoveWindow(object sender, MouseButtonEventArgs e)
@@ -65,23 +56,6 @@ namespace Screemer.Views
                 return;
 
             WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
-        }
-
-        void LoadSettings()
-        {
-            Width = Settings.Default.CapturedScreenView_Width;
-            Height = Settings.Default.CapturedScreenView_Height;
-            Left = Settings.Default.CapturedScreenView_Left;
-            Top = Settings.Default.CapturedScreenView_Top;
-        }
-
-        void SaveSettings()
-        {
-            Settings.Default.CapturedScreenView_Width = Width;
-            Settings.Default.CapturedScreenView_Height = Height;
-            Settings.Default.CapturedScreenView_Left = Left;
-            Settings.Default.CapturedScreenView_Top = Top;
-            Settings.Default.Save();
         }
     }
 }

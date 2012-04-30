@@ -3,20 +3,9 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:cal="http://www.caliburnproject.org"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                      Width="400" SizeToContent="Height"
-                      Height="600">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
+                      Width="400"
+                      Height="600"
+                      SizeToContent="Height">
     <Window.Background>
         <LinearGradientBrush MappingMode="Absolute" StartPoint="0,0" EndPoint="0,150">
             <GradientStop Color="#FFDEDEDE" />
@@ -27,24 +16,26 @@
         <HeaderedContentControl Header="Profile" Style="{StaticResource SectionControl}">
             <ContentControl x:Name="SelectProfile" />
         </HeaderedContentControl>
-        <HeaderedContentControl Header="Capture Region" Style="{StaticResource SectionControl}">
-            <ContentControl x:Name="CaptureRegionSettings" />
+        <HeaderedContentControl Header="Capture Region" Style="{StaticResource SectionControl}" HorizontalContentAlignment="Center">
+            <ContentControl x:Name="CaptureRegionSettings" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
         </HeaderedContentControl>
         <HeaderedContentControl Header="Stream" Style="{StaticResource SectionControl}">
             <StackPanel>
                 <Button Margin="{StaticResource ContentElementMargin}"
-                        cal:Action.Target="{Binding Playback}"
+                        HorizontalAlignment="Center"
+                        cal:Action.Target="{Binding PlaybackStream}"
                         cal:Message.Attach="Show"
-                        Content="Start"
-                        Style="{DynamicResource SquareButtonStyle}"
+                        Content="{StaticResource appbar_play}"
+                        Style="{DynamicResource MetroCircleButtonStyle}"
                         Visibility="{Binding IsEnabled,
                                              RelativeSource={RelativeSource Self},
                                              Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <Button Margin="{StaticResource ContentElementMargin}"
-                        cal:Action.Target="{Binding Playback}"
+                        HorizontalAlignment="Center"
+                        cal:Action.Target="{Binding PlaybackStream}"
                         cal:Message.Attach="Hide"
-                        Content="Stop"
-                        Style="{DynamicResource SquareButtonStyle}"
+                        Content="{StaticResource appbar_stop_playback}"
+                        Style="{DynamicResource MetroCircleButtonStyle}"
                         Visibility="{Binding IsEnabled,
                                              RelativeSource={RelativeSource Self},
                                              Converter={StaticResource BooleanToVisibilityConverter}}" />

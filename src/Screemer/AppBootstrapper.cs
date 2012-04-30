@@ -31,7 +31,7 @@ namespace Screemer
 		    builder.Register<IShell, ShellViewModel>();
 		    builder.Register<ISelectCaptureRegion, SelectCaptureRegionOverlay>().ControlledBy<TransientLifecycle>();
 		    builder.Register<ShellView>();
-		    builder.Register<PlaybackViewModel>();
+		    builder.Register<PlaybackStreamViewModel>();
 		    builder.Register<CaptureRegionSettingsViewModel>();
 		    builder.Register<SelectProfileViewModel>();
 		    builder.Register<IActiveProfileProvider>(c => c.Resolve<SelectProfileViewModel>());

@@ -6,5 +6,21 @@
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
-    <ComboBox ItemsSource="{Binding AvailableProfiles}" SelectedItem="{Binding ActiveProfile}" DisplayMemberPath="Name" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <ComboBox DisplayMemberPath="Name"
+                  ItemsSource="{Binding AvailableProfiles}"
+                  SelectedItem="{Binding ActiveProfile}" />
+        <StackPanel Grid.Row="1"
+                    Margin="{StaticResource ContentElementMargin}"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+            <Button Content="{StaticResource appbar_add}" Style="{DynamicResource MetroCircleButtonStyle}" />
+            <Button Content="{StaticResource appbar_edit}" Style="{DynamicResource MetroCircleButtonStyle}" />
+            <Button Content="{StaticResource appbar_delete}" Style="{DynamicResource MetroCircleButtonStyle}" />
+        </StackPanel>
+    </Grid>
 </UserControl>

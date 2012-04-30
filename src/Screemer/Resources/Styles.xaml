@@ -5,6 +5,7 @@
     <Thickness x:Key="SectionContentMargin">10 0</Thickness>
     <Thickness x:Key="ContentElementMargin">0 5</Thickness>
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
     <Style x:Key="SectionControl" TargetType="HeaderedContentControl">
         <Setter Property="Margin" Value="{StaticResource SectionMargin}" />
         <Setter Property="Focusable" Value="False" />
@@ -12,7 +13,7 @@
         <Setter Property="HeaderTemplate">
             <Setter.Value>
                 <DataTemplate>
-                    <TextBlock Margin="0 5"
+                    <TextBlock Margin="0 15"
                                FontSize="24"
                                FontWeight="Bold"
                                Foreground="{DynamicResource BodyTextColorBrush}"
@@ -100,7 +101,6 @@
 
     <Style x:Key="MetroSpinner" TargetType="{x:Type xctk:ButtonSpinner}">
         <Setter Property="Background" Value="{DynamicResource GrayBrush7}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource TransparentWhiteBrush}" />
         <Setter Property="Focusable" Value="False" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="IsTabStop" Value="True" />
@@ -153,9 +153,10 @@
     </Style>
 
     <Style x:Key="MetroNumericUpDown" TargetType="Control">
-        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TextBoxBorderBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
         <Setter Property="HorizontalContentAlignment" Value="Right" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -177,6 +178,7 @@
                                  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                  AcceptsReturn="False"
                                  Background="Transparent"
+                                 BorderBrush="{StaticResource TransparentWhiteBrush}"
                                  BorderThickness="0"
                                  ContextMenu="{TemplateBinding ContextMenu}"
                                  FontFamily="{TemplateBinding FontFamily}"

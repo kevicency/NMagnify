@@ -34,10 +34,10 @@ namespace Screemer.Controls
 
             Loaded += (sender, args) =>
             {
-                Left = 0;
-                Top = 0;
-                Width = Screen.AllScreens.Sum(x => x.WorkingArea.Width);
-                Height = Screen.AllScreens.Max(x => x.WorkingArea.Height);
+                Left = SystemInformation.VirtualScreen.Left;
+                Top = SystemInformation.VirtualScreen.Top;
+                Width = SystemInformation.VirtualScreen.Width;
+                Height = SystemInformation.VirtualScreen.Height;
 
                 verticalLine.Y1 = 0;
                 verticalLine.Y2 = Height;
@@ -80,6 +80,10 @@ namespace Screemer.Controls
                     _secondSelection = pos;
 
                     var region = new ScreenRegion(_firstSelection.Value, _secondSelection.Value);
+                    region.Left += (int)Left;
+                    region.Right += (int) Left;
+                    region.Top += (int)Top;
+                    region.Bottom += (int)Top;
                     OnScreenRegionSelected(new ScreenRegionSelectedEventArgs(region));
                     Close();
                 }

@@ -6,59 +6,53 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
         <xctk:IntegerUpDown Grid.Row="0"
                             Grid.Column="1"
-                            Width="75"
-                            Minimum="0"
+                            Width="60"
                             Style="{StaticResource MetroNumericUpDown}"
                             Value="{Binding Top}" />
         <xctk:IntegerUpDown Grid.Row="1"
                             Grid.Column="0"
-                            Width="75"
+                            Width="60"
                             VerticalAlignment="Center"
                             FlowDirection="RightToLeft"
-                            Minimum="0"
                             Style="{StaticResource MetroNumericUpDown}"
                             Value="{Binding Left}" />
         <xctk:IntegerUpDown Grid.Row="2"
                             Grid.Column="1"
-                            Width="75"
-                            Minimum="0"
+                            Width="60"
                             Style="{StaticResource MetroNumericUpDown}"
                             Value="{Binding Bottom}" />
         <xctk:IntegerUpDown Grid.Row="1"
                             Grid.Column="2"
-                            Width="75"
+                            Width="60"
                             VerticalAlignment="Center"
-                            Minimum="0"
                             Style="{StaticResource MetroNumericUpDown}"
                             Value="{Binding Right}" />
         <Button x:Name="SelectScreenRegion"
                 Grid.Row="1"
                 Grid.Column="1"
-                Height="{Binding ActualWidth,
-                                 RelativeSource={RelativeSource Self}}"
-                Margin="20"
-                Content="Pick Capture Region"
-                Style="{DynamicResource SquareButtonStyle}" />
+              
+                Margin="5"
+                Content="{StaticResource appbar_crop}"
+VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
+                Style="{DynamicResource MetroCircleButtonStyle}">
+            <!--
+                <Button.Content>
+                <Viewbox Child="{StaticResource appbar_crop}" />
+                </Button.Content>
+            -->
+        </Button>
     </Grid>
 </UserControl>
