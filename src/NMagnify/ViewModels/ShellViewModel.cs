@@ -9,7 +9,7 @@ namespace NMagnify.ViewModels
                               CaptureRegionSettingsViewModel captureRegionSettings,
                               ProfileManagerViewModel profileManager)
         {
-            DisplayName = "Screemer";
+            DisplayName = App.Name;
             PlaybackStream = playbackStream;
             CaptureRegionSettings = captureRegionSettings;
             ProfileManager = profileManager;

@@ -34,5 +34,29 @@ namespace NMagnify.Properties {
                 this["LastActiveProfile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Shell_Left {
+            get {
+                return ((int)(this["Shell_Left"]));
+            }
+            set {
+                this["Shell_Left"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Shell_Top {
+            get {
+                return ((int)(this["Shell_Top"]));
+            }
+            set {
+                this["Shell_Top"] = value;
+            }
+        }
     }
 }

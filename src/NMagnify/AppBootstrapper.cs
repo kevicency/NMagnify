@@ -21,7 +21,7 @@ namespace NMagnify
         protected override void Configure()
         {
             FrameworkExtensions.ViewLocator.EnableContextFallback();
-            ViewLocator.AddSubNamespaceMapping("Caliburn.Micro.Contrib.Dialogs", "Screemer.Views");
+            ViewLocator.AddSubNamespaceMapping("Caliburn.Micro.Contrib.Dialogs", "NMagnify.Views");
 
             var builder = new ContainerBuilder();
             builder.DefaultControlledBy<SingletonLifecycle>();

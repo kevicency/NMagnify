@@ -127,6 +127,11 @@
     <Compile Include="Model\ScreenCapturedEventArgs.cs" />
     <Compile Include="Model\ScreenRegion.cs" />
     <Compile Include="Model\ScreenRegionSelectedEventArgs.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Results\SelectCaptureRegionResult.cs" />
     <Compile Include="Views\Dialog\EditProfileDialog.cs" />
     <Compile Include="ViewModels\PlaybackStreamViewModel.cs" />
@@ -151,6 +156,9 @@
     <Compile Include="Views\ProfileManagerView.xaml.cs">
       <DependentUpon>ProfileManagerView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ShellView.xaml.cs">
+      <DependentUpon>ShellView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppBootstrapper.cs" />
@@ -166,22 +174,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
+    <AppDesigner Include="Properties\" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <AppDesigner Include="Properties\" />
     <Resource Include="Resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
