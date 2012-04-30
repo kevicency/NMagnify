@@ -75,15 +75,16 @@ namespace Screemer.Controls
                 {
                     _firstSelection = pos;
                 }
-                else
+                else if ((int) _firstSelection.Value.X != (int) pos.X
+                         && (int) _firstSelection.Value.Y != (int) pos.Y)
                 {
                     _secondSelection = pos;
 
                     var region = new ScreenRegion(_firstSelection.Value, _secondSelection.Value);
-                    region.Left += (int)Left;
+                    region.Left += (int) Left;
                     region.Right += (int) Left;
-                    region.Top += (int)Top;
-                    region.Bottom += (int)Top;
+                    region.Top += (int) Top;
+                    region.Bottom += (int) Top;
                     OnScreenRegionSelected(new ScreenRegionSelectedEventArgs(region));
                     Close();
                 }

@@ -52,7 +52,8 @@ namespace Screemer.ViewModels
         {
             base.OnInitialize();
 
-            AvailableProfiles.AddRange(_profileManager.LoadAll());
+            AvailableProfiles.AddRange(_profileManager.LoadAll()
+                .OrderBy(x => x.Name));
             ActiveProfile = AvailableProfiles.SingleOrDefault(x => x.Guid == Settings.Default.LastActiveProfile)
                 ?? AvailableProfiles.First();
 
@@ -92,6 +93,17 @@ namespace Screemer.ViewModels
         {
             get { return AvailableProfiles.Count > 1 || ActiveProfile.Guid != Guid.Empty; }
             
+        }
+
+        public IEnumerable<IResult> CreateNewProfile()
+        {
+            var newProfile = Profile.Default;
+            newProfile.Name = "New profile";
+
+            AvailableProfiles.Add(newProfile);
+            ActiveProfile = newProfile;
+
+            return EditActiveProfile();
         }
 
         public IEnumerable<IResult> EditActiveProfile()
