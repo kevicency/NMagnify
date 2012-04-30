@@ -5,6 +5,8 @@
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
                       Width="400"
                       Height="600"
+                      Icon="..\nmagnify.ico"
+                      ShowIconOnTitleBar="True"
                       SizeToContent="Height">
     <Window.Background>
         <LinearGradientBrush MappingMode="Absolute" StartPoint="0,0" EndPoint="0,150">
@@ -31,6 +33,7 @@
                         cal:Message.Attach="Show"
                         Content="{StaticResource appbar_play}"
                         Style="{DynamicResource MetroCircleButtonStyle}"
+                        ToolTip="Start Stream"
                         Visibility="{Binding IsEnabled,
                                              RelativeSource={RelativeSource Self},
                                              Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -40,6 +43,7 @@
                         cal:Message.Attach="Hide"
                         Content="{StaticResource appbar_stop_playback}"
                         Style="{DynamicResource MetroCircleButtonStyle}"
+                        ToolTip="Stop Stream"
                         Visibility="{Binding IsEnabled,
                                              RelativeSource={RelativeSource Self},
                                              Converter={StaticResource BooleanToVisibilityConverter}}" />
