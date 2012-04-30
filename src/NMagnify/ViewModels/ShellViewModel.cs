@@ -31,5 +31,17 @@ namespace NMagnify.ViewModels
         {
             _windowManager.ShowDialog(new AboutViewModel());
         }
+
+        public void ToggleStream()
+        {
+            if (PlaybackStream.CanShow)
+            {
+                PlaybackStream.Show();
+            }
+            else
+            {
+                PlaybackStream.Hide();
+            }
+        }
     }
 }

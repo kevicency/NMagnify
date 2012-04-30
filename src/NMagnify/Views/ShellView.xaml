@@ -3,6 +3,8 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:cal="http://www.caliburnproject.org"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                      xmlns:s="clr-namespace:NMagnify.Controls"
                       Width="300"
                       MinWidth="300"
                       Background="{StaticResource WindowGradientBrush}"
@@ -16,6 +18,14 @@
             </Button>
         </Controls:WindowCommands>
     </Controls:MetroWindow.WindowCommands>
+    <i:Interaction.Triggers>
+        <s:InputBindingTrigger>
+            <s:InputBindingTrigger.InputBinding>
+                <KeyBinding Key="P" Modifiers="Ctrl" />
+            </s:InputBindingTrigger.InputBinding>
+            <cal:ActionMessage MethodName="ToggleStream" />
+        </s:InputBindingTrigger>
+    </i:Interaction.Triggers>
     <StackPanel>
         <HeaderedContentControl Header="Profile" Style="{StaticResource SectionControl}">
             <ContentControl x:Name="ProfileManager" />
