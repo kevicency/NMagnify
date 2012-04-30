@@ -18,11 +18,11 @@ namespace NMagnify.Converters
                 case DialogType.None:
                     return Colors.Black;
                 case DialogType.Question:
-                    return Colors.Blue;
+                    return Color.FromRgb(59,171,219);
                 case DialogType.Warning:
                     return Colors.Yellow;
                 case DialogType.Information:
-                    return Colors.Green;
+                    return Color.FromRgb(59, 171, 219);
                 case DialogType.Error:
                     return Colors.Red;
                 default:
