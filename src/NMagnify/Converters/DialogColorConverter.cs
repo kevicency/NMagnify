@@ -8,6 +8,8 @@ namespace NMagnify.Converters
 {
     public class DialogColorConverter : IValueConverter
     {
+        #region IValueConverter Members
+
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             var dialogtype = (DialogType) value;
@@ -32,5 +34,7 @@ namespace NMagnify.Converters
         {
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }

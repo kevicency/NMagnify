@@ -3,7 +3,7 @@
 namespace NMagnify.Views.Dialog
 {
     /// <summary>
-    /// Interaction logic for EditProfile.xaml
+    ///   Interaction logic for EditProfile.xaml
     /// </summary>
     public partial class EditProfile : Window
     {

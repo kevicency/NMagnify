@@ -10,7 +10,7 @@ namespace NMagnify.Controls
 {
     public interface ISelectCaptureRegion
     {
-        event EventHandler SelectionCancelled; 
+        event EventHandler SelectionCancelled;
         event EventHandler<ScreenRegionSelectedEventArgs> ScreenRegionSelected;
 
         void Show();
@@ -94,6 +94,10 @@ namespace NMagnify.Controls
 
         public event EventHandler SelectionCancelled;
 
+        public event EventHandler<ScreenRegionSelectedEventArgs> ScreenRegionSelected;
+
+        #endregion
+
         public void OnSelectionCancelled(EventArgs e)
         {
             EventHandler handler = SelectionCancelled;
@@ -102,10 +106,6 @@ namespace NMagnify.Controls
                 handler(this, e);
             }
         }
-
-        public event EventHandler<ScreenRegionSelectedEventArgs> ScreenRegionSelected;
-
-        #endregion
 
         public void OnScreenRegionSelected(ScreenRegionSelectedEventArgs e)
         {

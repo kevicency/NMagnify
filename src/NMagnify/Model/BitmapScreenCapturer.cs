@@ -21,11 +21,15 @@ namespace NMagnify.Model
 
         public BitmapToImageSource BitmapConverter { get; set; }
 
+        public int CapturesPerSecond
+        {
+            get { return CapturesPerSecondResolver(); }
+        }
+
         #region IScreenCapturer Members
 
         public event EventHandler<ScreenCapturedEventArgs> ScreenCaptured;
 
-        public int CapturesPerSecond { get { return CapturesPerSecondResolver(); } }
         public Func<ScreenRegion> CaptureRegionResolver { get; set; }
 
         public bool IsRunning { get; private set; }
@@ -94,7 +98,7 @@ namespace NMagnify.Model
             var region = CaptureRegionResolver();
             if (region != null)
             {
-                var bitmap = new Bitmap((int) region.Width, (int) region.Height);
+                var bitmap = new Bitmap(region.Width, region.Height);
 
                 using (Graphics graphics = Graphics.FromImage(bitmap))
                 {
@@ -105,7 +109,7 @@ namespace NMagnify.Model
 
                 return bitmap;
             }
-            return new Bitmap(1,1);
+            return new Bitmap(1, 1);
         }
     }
 }

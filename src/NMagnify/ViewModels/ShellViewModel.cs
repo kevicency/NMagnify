@@ -5,7 +5,9 @@ namespace NMagnify.ViewModels
 {
     public class ShellViewModel : Screen, IShell
     {
-        public ShellViewModel(PlaybackStreamViewModel playbackStream, CaptureRegionSettingsViewModel captureRegionSettings, ProfileManagerViewModel profileManager)
+        public ShellViewModel(PlaybackStreamViewModel playbackStream,
+                              CaptureRegionSettingsViewModel captureRegionSettings,
+                              ProfileManagerViewModel profileManager)
         {
             DisplayName = "Screemer";
             PlaybackStream = playbackStream;
@@ -26,6 +28,6 @@ namespace NMagnify.ViewModels
             PlaybackStream.Show();
 
             yield break;
-        } 
+        }
     }
 }

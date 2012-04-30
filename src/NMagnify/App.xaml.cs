@@ -5,14 +5,15 @@ using System.Windows;
 namespace NMagnify
 {
     /// <summary>
-    /// Interaction logic for App.xaml
+    ///   Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public class App : Application
     {
         public static string Name
         {
             get { return "NMagnify"; }
         }
+
         public static string AppDataFolder
         {
             get
@@ -22,6 +23,5 @@ namespace NMagnify
                 return Path.Combine(appDataFolder, Name);
             }
         }
-
     }
 }

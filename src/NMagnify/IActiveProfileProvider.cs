@@ -5,7 +5,7 @@ namespace NMagnify
 {
     public interface IActiveProfileProvider
     {
-        event EventHandler<ProfileEventArgs> ActiveProfileChanged;
         Profile ActiveProfile { get; }
+        event EventHandler<ProfileEventArgs> ActiveProfileChanged;
     }
 }

@@ -5,7 +5,7 @@ using MahApps.Metro.Controls;
 namespace NMagnify.Views
 {
     /// <summary>
-    /// Interaction logic for PlaybackStreamView.xaml
+    ///   Interaction logic for PlaybackStreamView.xaml
     /// </summary>
     public partial class PlaybackStreamView : MetroWindow
     {
@@ -16,7 +16,8 @@ namespace NMagnify.Views
 
         void DragMoveWindow(object sender, MouseButtonEventArgs e)
         {
-            if (e.RightButton != MouseButtonState.Pressed && e.MiddleButton != MouseButtonState.Pressed && e.LeftButton == MouseButtonState.Pressed)
+            if (e.RightButton != MouseButtonState.Pressed && e.MiddleButton != MouseButtonState.Pressed &&
+                e.LeftButton == MouseButtonState.Pressed)
             {
                 if (WindowState == WindowState.Maximized)
                 {
@@ -35,13 +36,14 @@ namespace NMagnify.Views
 
                     // Restore window to normal state.
                     WindowState = WindowState.Normal;
-
                 }
 
                 DragMove();
             }
             if (e.ClickCount != 2)
+            {
                 return;
+            }
 
             WindowState = WindowState == WindowState.Maximized ? WindowState.Normal : WindowState.Maximized;
         }

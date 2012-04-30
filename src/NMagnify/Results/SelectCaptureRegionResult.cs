@@ -11,6 +11,8 @@ namespace NMagnify.Results
 
         public ScreenRegion ScreenRegion { get; set; }
 
+        #region IResult Members
+
         public void Execute(ActionExecutionContext context)
         {
             SelectCaptureRegion.ScreenRegionSelected += (sender, args) =>
@@ -19,12 +21,15 @@ namespace NMagnify.Results
                 Completed(this, new ResultCompletionEventArgs());
             };
 
-            SelectCaptureRegion.SelectionCancelled += (sender, args) => 
-                Completed(this, new ResultCompletionEventArgs() {WasCancelled = true});
+            SelectCaptureRegion.SelectionCancelled += (sender, args) =>
+                                                      Completed(this,
+                                                          new ResultCompletionEventArgs {WasCancelled = true});
 
             SelectCaptureRegion.Show();
         }
 
         public event EventHandler<ResultCompletionEventArgs> Completed = delegate { };
+
+        #endregion
     }
 }

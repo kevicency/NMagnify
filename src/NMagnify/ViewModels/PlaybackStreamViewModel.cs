@@ -13,8 +13,8 @@ namespace NMagnify.ViewModels
         PlaybackStreamView _streamView;
 
         public PlaybackStreamViewModel(IScreenCapturer screenCapturer,
-                                 IWindowManager windowManager,
-                                 IActiveProfileProvider activeProfileProvider)
+                                       IWindowManager windowManager,
+                                       IActiveProfileProvider activeProfileProvider)
         {
             _screenCapturer = screenCapturer;
             _windowManager = windowManager;
@@ -24,8 +24,8 @@ namespace NMagnify.ViewModels
                                                               ? ActiveProfile.CaptureRegion
                                                               : null;
             _screenCapturer.CapturesPerSecondResolver = () => ActiveProfile != null
-                                                              ? ActiveProfile.CPS
-                                                              : 25;
+                                                                  ? ActiveProfile.CPS
+                                                                  : 25;
             _screenCapturer.ScreenCaptured += (sender, args) => { CapturedImage = args.CapturedImage; };
 
             CanShow = true;
@@ -88,8 +88,8 @@ namespace NMagnify.ViewModels
             {
                 PlaybackRegion.Left = (int) _streamView.Left;
                 PlaybackRegion.Top = (int) _streamView.Top;
-                PlaybackRegion.Right = PlaybackRegion.Left + (int)_streamView.Width;
-                PlaybackRegion.Bottom = PlaybackRegion.Top + (int)_streamView.Height;
+                PlaybackRegion.Right = PlaybackRegion.Left + (int) _streamView.Width;
+                PlaybackRegion.Bottom = PlaybackRegion.Top + (int) _streamView.Height;
                 _streamView = null;
                 CanShow = true;
             }

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Caliburn.Micro;
-using Caliburn.Micro.Contrib.Dialogs;
 using System.Linq;
+using Caliburn.Micro;
 using Caliburn.Micro.Contrib;
+using Caliburn.Micro.Contrib.Dialogs;
 using NMagnify.Model;
 using NMagnify.Properties;
 using NMagnify.Views.Dialog;
@@ -22,6 +22,11 @@ namespace NMagnify.ViewModels
         }
 
         public IObservableCollection<Profile> AvailableProfiles { get; private set; }
+
+        public bool CanDeleteActiveProfile
+        {
+            get { return AvailableProfiles.Count > 1 || ActiveProfile.Guid != Guid.Empty; }
+        }
 
         #region IActiveProfileProvider Members
 
@@ -55,7 +60,7 @@ namespace NMagnify.ViewModels
             AvailableProfiles.AddRange(_profileManager.LoadAll()
                 .OrderBy(x => x.Name));
             ActiveProfile = AvailableProfiles.SingleOrDefault(x => x.Guid == Settings.Default.LastActiveProfile)
-                ?? AvailableProfiles.First();
+                            ?? AvailableProfiles.First();
 
             _profileManager.ProfileCreated += AddCreatedProfile;
             _profileManager.ProfileDeleted += RemoveDeletedProfile;
@@ -89,12 +94,6 @@ namespace NMagnify.ViewModels
             AvailableProfiles.Add(e.Profile);
         }
 
-        public bool CanDeleteActiveProfile
-        {
-            get { return AvailableProfiles.Count > 1 || ActiveProfile.Guid != Guid.Empty; }
-            
-        }
-
         public IEnumerable<IResult> CreateNewProfile()
         {
             var newProfile = Profile.Default;
@@ -108,7 +107,7 @@ namespace NMagnify.ViewModels
 
         public IEnumerable<IResult> EditActiveProfile()
         {
-            var editor = new EditProfileDialog()
+            var editor = new EditProfileDialog
                          {
                              Name = ActiveProfile.Name,
                              CPS = ActiveProfile.CPS
@@ -134,7 +133,7 @@ namespace NMagnify.ViewModels
                 .CancelOnResponse(Answer.No);
 
             var toDelete = ActiveProfile;
-            
+
             if (AvailableProfiles.Count == 1)
             {
                 AvailableProfiles.Add(Profile.Default);
@@ -149,11 +148,10 @@ namespace NMagnify.ViewModels
             {
                 ActiveProfile = AvailableProfiles[index + 1];
             }
-            
+
             _profileManager.Delete(toDelete);
 
             yield break;
         }
-
     }
 }

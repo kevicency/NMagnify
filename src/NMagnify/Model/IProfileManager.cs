@@ -7,7 +7,7 @@ namespace NMagnify.Model
     {
         event EventHandler<ProfileEventArgs> ProfileCreated;
         event EventHandler<ProfileEventArgs> ProfileDeleted;
-        
+
         IEnumerable<Profile> LoadAll();
 
         void Save(Profile profile);

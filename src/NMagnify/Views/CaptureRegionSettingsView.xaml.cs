@@ -3,7 +3,7 @@
 namespace NMagnify.Views
 {
     /// <summary>
-    /// Interaction logic for CaptureRegionSettingsView.xaml
+    ///   Interaction logic for CaptureRegionSettingsView.xaml
     /// </summary>
     public partial class CaptureRegionSettingsView : UserControl
     {

@@ -1,3 +1,4 @@
-﻿namespace NMagnify.ViewModels {
+﻿namespace NMagnify.ViewModels
+{
     public interface IShell {}
 }

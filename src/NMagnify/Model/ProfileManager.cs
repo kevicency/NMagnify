@@ -7,42 +7,16 @@ namespace NMagnify.Model
 {
     public class ProfileManager : IProfileManager
     {
-
-        public string ProfilesFolder { get { return Path.Combine(App.AppDataFolder, "Profiles"); } }
-
-        void EnsureFolders()
+        public string ProfilesFolder
         {
-            if(!Directory.Exists(App.AppDataFolder))
-            {
-                Directory.CreateDirectory(App.AppDataFolder);
-            }
-            if (!Directory.Exists(ProfilesFolder))
-            {
-                Directory.CreateDirectory(ProfilesFolder);
-            }
+            get { return Path.Combine(App.AppDataFolder, "Profiles"); }
         }
+
+        #region IProfileManager Members
 
         public event EventHandler<ProfileEventArgs> ProfileCreated;
 
-        public void OnProfileCreated(ProfileEventArgs e)
-        {
-            EventHandler<ProfileEventArgs> handler = ProfileCreated;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-        }
-
         public event EventHandler<ProfileEventArgs> ProfileDeleted;
-
-        public void OnProfileDeleted(ProfileEventArgs e)
-        {
-            EventHandler<ProfileEventArgs> handler = ProfileDeleted;
-            if (handler != null)
-            {
-                handler(this, e);
-            }
-        }
 
         public IEnumerable<Profile> LoadAll()
         {
@@ -65,7 +39,10 @@ namespace NMagnify.Model
                 hasProfiles = true;
             }
 
-            if (!hasProfiles) yield return Profile.Default;
+            if (!hasProfiles)
+            {
+                yield return Profile.Default;
+            }
         }
 
 
@@ -87,20 +64,18 @@ namespace NMagnify.Model
         {
             bool isTransient = profile.Guid == Guid.Empty;
 
-            if (isTransient) profile.Guid = Guid.NewGuid();
+            if (isTransient)
+            {
+                profile.Guid = Guid.NewGuid();
+            }
             var json = JsonConvert.SerializeObject(profile);
             var file = GetFile(profile.Guid);
             File.WriteAllText(file, json);
 
-            if(isTransient) OnProfileCreated(new ProfileEventArgs(profile));
-        }
-
-        string GetFile(Guid guid)
-        {
-            EnsureFolders();
-            var fileName = string.Format("{0}.json", guid);
-            var file = Path.Combine(ProfilesFolder, fileName);
-            return file;
+            if (isTransient)
+            {
+                OnProfileCreated(new ProfileEventArgs(profile));
+            }
         }
 
         public void Delete(Profile profile)
@@ -122,6 +97,46 @@ namespace NMagnify.Model
             copy.PlaybackRegion = profile.PlaybackRegion.Clone();
 
             return copy;
+        }
+
+        #endregion
+
+        void EnsureFolders()
+        {
+            if (!Directory.Exists(App.AppDataFolder))
+            {
+                Directory.CreateDirectory(App.AppDataFolder);
+            }
+            if (!Directory.Exists(ProfilesFolder))
+            {
+                Directory.CreateDirectory(ProfilesFolder);
+            }
+        }
+
+        public void OnProfileCreated(ProfileEventArgs e)
+        {
+            EventHandler<ProfileEventArgs> handler = ProfileCreated;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        public void OnProfileDeleted(ProfileEventArgs e)
+        {
+            EventHandler<ProfileEventArgs> handler = ProfileDeleted;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        string GetFile(Guid guid)
+        {
+            EnsureFolders();
+            var fileName = string.Format("{0}.json", guid);
+            var file = Path.Combine(ProfilesFolder, fileName);
+            return file;
         }
     }
 }
