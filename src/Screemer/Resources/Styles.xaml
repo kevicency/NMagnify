@@ -3,6 +3,7 @@
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
     <Thickness x:Key="SectionMargin">10</Thickness>
     <Thickness x:Key="SectionContentMargin">10 0</Thickness>
+    <Thickness x:Key="ContentElementMargin">0 5</Thickness>
     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
     <Style x:Key="SectionControl" TargetType="HeaderedContentControl">
         <Setter Property="Margin" Value="{StaticResource SectionMargin}" />

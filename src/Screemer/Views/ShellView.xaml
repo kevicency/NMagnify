@@ -3,8 +3,8 @@
                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                       xmlns:cal="http://www.caliburnproject.org"
                       xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                      Width="480"
-                      Height="640">
+                      Width="400" SizeToContent="Height"
+                      Height="600">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -30,6 +30,26 @@
         <HeaderedContentControl Header="Capture Region" Style="{StaticResource SectionControl}">
             <ContentControl x:Name="CaptureRegionSettings" />
         </HeaderedContentControl>
-        <Button x:Name="ShowCapturedScreen" Content="Show" />
+        <HeaderedContentControl Header="Stream" Style="{StaticResource SectionControl}">
+            <StackPanel>
+                <Button Margin="{StaticResource ContentElementMargin}"
+                        cal:Action.Target="{Binding Playback}"
+                        cal:Message.Attach="Show"
+                        Content="Start"
+                        Style="{DynamicResource SquareButtonStyle}"
+                        Visibility="{Binding IsEnabled,
+                                             RelativeSource={RelativeSource Self},
+                                             Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Button Margin="{StaticResource ContentElementMargin}"
+                        cal:Action.Target="{Binding Playback}"
+                        cal:Message.Attach="Hide"
+                        Content="Stop"
+                        Style="{DynamicResource SquareButtonStyle}"
+                        Visibility="{Binding IsEnabled,
+                                             RelativeSource={RelativeSource Self},
+                                             Converter={StaticResource BooleanToVisibilityConverter}}" />
+            </StackPanel>
+        </HeaderedContentControl>
+
     </StackPanel>
 </Controls:MetroWindow>

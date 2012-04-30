@@ -25,58 +25,40 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
-        <StackPanel Orientation="Horizontal">
-            <HeaderedContentControl Margin="3 1 0 1"
-                                    HorizontalAlignment="Center"
-                                    Header="Top"
-                                    Style="{StaticResource CaptureRegionCoordinateControl}">
-                <xctk:IntegerUpDown FlowDirection="RightToLeft"
-                                    Minimum="0"
-                                    Style="{StaticResource MetroNumericUpDown}"
-                                    Value="{Binding Top}" />
-            </HeaderedContentControl>
-            <HeaderedContentControl Margin="0 1 3 1"
-                                    VerticalAlignment="Center"
-                                    Header="Left"
-                                    Style="{StaticResource CaptureRegionCoordinateControl}">
-                <xctk:IntegerUpDown Minimum="0"
-                                    Style="{StaticResource MetroNumericUpDown}"
-                                    Value="{Binding Left}" />
-            </HeaderedContentControl>
-        </StackPanel>
-        <StackPanel Grid.Row="2"
-                    Grid.Column="2"
-                    Orientation="Horizontal">
-            <HeaderedContentControl Margin="3 1 0 1"
-                                    HorizontalAlignment="Center"
-                                    Header="Bottom"
-                                    Style="{StaticResource CaptureRegionCoordinateControl}">
-                <xctk:IntegerUpDown FlowDirection="RightToLeft"
-                                    Minimum="0"
-                                    Style="{StaticResource MetroNumericUpDown}"
-                                    Value="{Binding Bottom}" />
-            </HeaderedContentControl>
-            <HeaderedContentControl Margin="0 1 3 1"
-                                    VerticalAlignment="Center"
-                                    Header="Right"
-                                    Style="{StaticResource CaptureRegionCoordinateControl}">
-                <xctk:IntegerUpDown Minimum="0"
-                                    Style="{StaticResource MetroNumericUpDown}"
-                                    Value="{Binding Right}" />
-            </HeaderedContentControl>
-        </StackPanel>
-
+        <xctk:IntegerUpDown Grid.Row="0"
+                            Grid.Column="1"
+                            Width="75"
+                            Minimum="0"
+                            Style="{StaticResource MetroNumericUpDown}"
+                            Value="{Binding Top}" />
+        <xctk:IntegerUpDown Grid.Row="1"
+                            Grid.Column="0"
+                            Width="75"
+                            VerticalAlignment="Center"
+                            FlowDirection="RightToLeft"
+                            Minimum="0"
+                            Style="{StaticResource MetroNumericUpDown}"
+                            Value="{Binding Left}" />
+        <xctk:IntegerUpDown Grid.Row="2"
+                            Grid.Column="1"
+                            Width="75"
+                            Minimum="0"
+                            Style="{StaticResource MetroNumericUpDown}"
+                            Value="{Binding Bottom}" />
+        <xctk:IntegerUpDown Grid.Row="1"
+                            Grid.Column="2"
+                            Width="75"
+                            VerticalAlignment="Center"
+                            Minimum="0"
+                            Style="{StaticResource MetroNumericUpDown}"
+                            Value="{Binding Right}" />
         <Button x:Name="SelectScreenRegion"
                 Grid.Row="1"
-                Grid.ColumnSpan="3"
-                Height="100"
-                Margin="22 5"
-                Style="{DynamicResource SquareButtonStyle}">
-            <Button.Content>
-                <TextBlock FontSize="18"
-                           FontWeight="Bold"
-                           Text="Pick Capture Region" />
-            </Button.Content>
-        </Button>
+                Grid.Column="1"
+                Height="{Binding ActualWidth,
+                                 RelativeSource={RelativeSource Self}}"
+                Margin="20"
+                Content="Pick Capture Region"
+                Style="{DynamicResource SquareButtonStyle}" />
     </Grid>
 </UserControl>
