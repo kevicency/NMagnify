@@ -151,6 +151,7 @@ namespace NMagnify.ViewModels
 
             _profileManager.Delete(toDelete);
 
+            NotifyOfPropertyChange(() => CanDeleteActiveProfile);
             yield break;
         }
     }

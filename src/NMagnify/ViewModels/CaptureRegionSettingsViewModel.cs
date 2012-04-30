@@ -70,6 +70,11 @@ namespace NMagnify.ViewModels
 
             yield return selectScreenRegionResult;
 
+            Right = int.MaxValue;
+            Left = int.MinValue;
+            Top = int.MaxValue;
+            Bottom = int.MaxValue;
+
             Left = selectScreenRegionResult.ScreenRegion.Left;
             Top = selectScreenRegionResult.ScreenRegion.Top;
             Bottom = selectScreenRegionResult.ScreenRegion.Bottom;
