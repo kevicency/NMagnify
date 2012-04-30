@@ -10,7 +10,11 @@ namespace NMagnify.Views.Dialog
         public EditProfile()
         {
             InitializeComponent();
-            Loaded += (sender, args) => Name.Focus();
+            Loaded += (sender, args) =>
+            {
+                Name.Focus();
+                Name.SelectAll();
+            };
         }
     }
 }

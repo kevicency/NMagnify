@@ -68,12 +68,16 @@ namespace NMagnify.Controls
             {
                 var pos = Mouse.GetPosition(this);
 
-                if (!_firstSelection.HasValue)
-                {
-                    _firstSelection = pos;
-                }
-                else if ((int) _firstSelection.Value.X != (int) pos.X
-                         && (int) _firstSelection.Value.Y != (int) pos.Y)
+                _firstSelection = pos;
+            };
+
+            MouseLeftButtonUp += (sender, args) =>
+            {
+                var pos = Mouse.GetPosition(this);
+
+                if (_firstSelection.HasValue
+                    && (int) _firstSelection.Value.X != (int) pos.X
+                    && (int) _firstSelection.Value.Y != (int) pos.Y)
                 {
                     _secondSelection = pos;
 
@@ -84,6 +88,10 @@ namespace NMagnify.Controls
                     region.Bottom += (int) Top;
                     OnScreenRegionSelected(new ScreenRegionSelectedEventArgs(region));
                     Close();
+                }
+                else
+                {
+                    ResetSelection();
                 }
             };
 

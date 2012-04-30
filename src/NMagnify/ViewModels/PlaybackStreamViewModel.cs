@@ -12,6 +12,8 @@ namespace NMagnify.ViewModels
         readonly IWindowManager _windowManager;
         PlaybackStreamView _streamView;
 
+        Profile _activeProfile;
+
         public PlaybackStreamViewModel(IScreenCapturer screenCapturer,
                                        IWindowManager windowManager,
                                        IActiveProfileProvider activeProfileProvider)
@@ -20,27 +22,39 @@ namespace NMagnify.ViewModels
             _windowManager = windowManager;
             _activeProfileProvider = activeProfileProvider;
 
-            _screenCapturer.CaptureRegionResolver = () => ActiveProfile != null
-                                                              ? ActiveProfile.CaptureRegion
-                                                              : null;
-            _screenCapturer.CapturesPerSecondResolver = () => ActiveProfile != null
-                                                                  ? ActiveProfile.CPS
+            _activeProfileProvider.ActiveProfileChanged += ChangeProfile;
+
+            _screenCapturer.CaptureRegionResolver = () => _activeProfile != null
+                                                              ? _activeProfile.CaptureRegion
+                                                              : new ScreenRegion();
+            _screenCapturer.CapturesPerSecondResolver = () => _activeProfile != null
+                                                                  ? _activeProfile.CPS
                                                                   : 25;
             _screenCapturer.ScreenCaptured += (sender, args) => { CapturedImage = args.CapturedImage; };
 
             CanShow = true;
-
-            Width = 100;
         }
 
-        Profile ActiveProfile
+        void ChangeProfile(object sender, ProfileEventArgs e)
         {
-            get { return _activeProfileProvider.ActiveProfile; }
+            ChangeProfile(e.Profile);
+        }
+
+        void ChangeProfile(Profile profile)
+        {
+            PersistViewPosition();
+            _activeProfile = profile;
+            LoadViewPosition();
         }
 
         public ScreenRegion PlaybackRegion
         {
-            get { return ActiveProfile.PlaybackRegion; }
+            get
+            {
+                return _activeProfile != null
+                           ? _activeProfile.PlaybackRegion
+                           : null;
+            }
         }
 
         public int Width { get; set; }
@@ -68,10 +82,24 @@ namespace NMagnify.ViewModels
         protected override void OnViewLoaded(object view)
         {
             base.OnViewLoaded(view);
-            _streamView.Width = PlaybackRegion.Width;
-            _streamView.Height = PlaybackRegion.Height;
-            _streamView.Left = PlaybackRegion.Left;
-            _streamView.Top = PlaybackRegion.Top;
+            LoadViewPosition();
+        }
+
+        void LoadViewPosition()
+        {
+            if (_streamView != null && PlaybackRegion != null)
+            {
+                _streamView.Width = PlaybackRegion.Width;
+                _streamView.Height = PlaybackRegion.Height;
+                _streamView.Left = PlaybackRegion.Left;
+                _streamView.Top = PlaybackRegion.Top;
+            }
+        }
+
+        protected override void OnInitialize()
+        {
+            base.OnInitialize();
+            _activeProfile = _activeProfileProvider.ActiveProfile;
         }
 
         protected override void OnActivate()
@@ -86,12 +114,20 @@ namespace NMagnify.ViewModels
             _screenCapturer.Stop();
             if (close && _streamView != null)
             {
+                PersistViewPosition();
+                _streamView = null;
+                CanShow = true;
+            }
+        }
+
+        void PersistViewPosition()
+        {
+            if (_streamView != null && PlaybackRegion != null)
+            {
                 PlaybackRegion.Left = (int) _streamView.Left;
                 PlaybackRegion.Top = (int) _streamView.Top;
                 PlaybackRegion.Right = PlaybackRegion.Left + (int) _streamView.Width;
                 PlaybackRegion.Bottom = PlaybackRegion.Top + (int) _streamView.Height;
-                _streamView = null;
-                CanShow = true;
             }
         }
 

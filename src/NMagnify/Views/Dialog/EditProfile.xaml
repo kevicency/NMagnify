@@ -23,7 +23,7 @@
         <ResourceDictionary>
             <Converter:EnumLocalizer x:Key="EnumLocalizer" />
             <DataTemplate DataType="{x:Type Dialogs:Answer}">
-                <ContentControl Content="{Binding ., Converter={StaticResource EnumLocalizer}}" Focusable="False"/>
+                <ContentControl Content="{Binding ., Converter={StaticResource EnumLocalizer}}" Focusable="False" />
             </DataTemplate>
             <Style BasedOn="{StaticResource ChromelessButtonStyle}" TargetType="Button">
                 <Setter Property="FontSize" Value="13" />
@@ -92,7 +92,9 @@
                                         VerticalContentAlignment="Center"
                                         Header="Name"
                                         Style="{StaticResource PropertyEditorStyle}">
-                    <TextBox Margin="3" Text="{Binding Dialog.Name}" x:Name="Name"/>
+                    <TextBox x:Name="Name"
+                             Margin="3"
+                             Text="{Binding Dialog.Name}" />
 
                 </HeaderedContentControl>
                 <HeaderedContentControl VerticalAlignment="Stretch"
@@ -100,6 +102,7 @@
                                         Header="FPS"
                                         Style="{StaticResource PropertyEditorStyle}">
                     <xctk:IntegerUpDown Margin="3"
+                                        Maximum="60"
                                         Minimum="1"
                                         Style="{StaticResource MetroNumericUpDown}"
                                         Value="{Binding Dialog.CPS}" />
