@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Caliburn.Micro;
 using Caliburn.Micro.Contrib;
 using LightCore;
@@ -20,7 +21,20 @@ namespace NMagnify
         /// </summary>
         protected override void Configure()
         {
-            FrameworkExtensions.ViewLocator.EnableContextFallback();
+            //FrameworkExtensions.ViewLocator.EnableContextFallback();
+            Func<string, object, IEnumerable<string>> baseTransformName = Caliburn.Micro.ViewLocator.TransformName;
+            Func<string, object, IEnumerable<string>> fallbackNameTransform = (typeName, context) =>
+            {
+                var names = baseTransformName(typeName, context);
+                if (context != null)
+                {
+                    names = names.Union(baseTransformName(typeName, null));
+                }
+
+                return names;
+            };
+            Caliburn.Micro.ViewLocator.TransformName = fallbackNameTransform;
+
             ViewLocator.AddSubNamespaceMapping("Caliburn.Micro.Contrib.Dialogs", "NMagnify.Views");
 
             var builder = new ContainerBuilder();
