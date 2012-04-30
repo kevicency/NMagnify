@@ -5,6 +5,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Screemer;component/Resources/Glyphs.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/Screemer;component/Resources/Styles.xaml" />
                 <ResourceDictionary>
                     <local:AppBootstrapper x:Key="bootstrapper" />
                 </ResourceDictionary>

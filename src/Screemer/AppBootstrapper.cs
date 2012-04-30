@@ -1,6 +1,7 @@
 ﻿using System.Windows.Threading;
 using LightCore;
 using LightCore.Lifecycle;
+using Screemer.Controls;
 using Screemer.Model;
 using Screemer.ViewModels;
 using Screemer.Views;

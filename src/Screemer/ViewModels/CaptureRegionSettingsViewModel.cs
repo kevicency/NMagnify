@@ -1,14 +1,13 @@
 using System.Collections.Generic;
 using Caliburn.Micro;
 using Screemer.Model;
-using Screemer.Result;
 using Screemer.Results;
 
 namespace Screemer.ViewModels
 {
     public class CaptureRegionSettingsViewModel : Screen
     {
-        IActiveProfileProvider _activeProfileProvider;
+        readonly IActiveProfileProvider _activeProfileProvider;
 
         public CaptureRegionSettingsViewModel(IActiveProfileProvider activeProfileProvider)
         {
@@ -18,25 +17,49 @@ namespace Screemer.ViewModels
         public int Left
         {
             get { return CaptureRegion.Left; }
-            set { CaptureRegion.Left = value; }
+            set
+            {
+                if (value < Right)
+                {
+                    CaptureRegion.Left = value;
+                }
+            }
         }
 
         public int Top
         {
             get { return CaptureRegion.Top; }
-            set { CaptureRegion.Top = value; }
+            set
+            {
+                if (value < Bottom)
+                {
+                    CaptureRegion.Top = value;
+                }
+            }
         }
 
         public int Right
         {
             get { return CaptureRegion.Right; }
-            set { CaptureRegion.Right = value; }
+            set
+            {
+                if (value > Left)
+                {
+                    CaptureRegion.Right = value;
+                }
+            }
         }
 
         public int Bottom
         {
             get { return CaptureRegion.Bottom; }
-            set { CaptureRegion.Bottom = value; }
+            set
+            {
+                if (value > Top)
+                {
+                    CaptureRegion.Bottom = value;
+                }
+            }
         }
 
         protected ScreenRegion CaptureRegion { get; set; }
@@ -62,7 +85,7 @@ namespace Screemer.ViewModels
             {
                 CaptureRegion = _activeProfileProvider.ActiveProfile.CaptureRegion;
             }
-    }
+        }
 
         void ActiveProfileChanged(object sender, ProfileEventArgs e)
         {

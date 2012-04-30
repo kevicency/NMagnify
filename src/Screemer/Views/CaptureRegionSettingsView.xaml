@@ -1,48 +1,82 @@
 ﻿<UserControl x:Class="Screemer.Views.CaptureRegionSettingsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Controls="clr-namespace:Screemer.Controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50" />
+            <RowDefinition Height="auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="50" />
+            <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
-        <HeaderedContentControl Grid.Row="1"
-                                Grid.Column="0"
-                                VerticalAlignment="Center"
-                                Header="Left">
-            <xctk:IntegerUpDown Minimum="0" Value="{Binding Left}" />
-        </HeaderedContentControl>
-        <HeaderedContentControl Grid.Row="0"
-                                Grid.Column="1"
-                                HorizontalAlignment="Center"
-                                Header="Top">
-            <xctk:IntegerUpDown Minimum="0" Value="{Binding Top}" />
-        </HeaderedContentControl>
-        <HeaderedContentControl Grid.Row="1"
-                                Grid.Column="2"
-                                VerticalAlignment="Center"
-                                Header="Right">
-            <xctk:IntegerUpDown Minimum="0" Value="{Binding Right}" />
-        </HeaderedContentControl>
-        <HeaderedContentControl Grid.Row="2"
-                                Grid.Column="1"
-                                HorizontalAlignment="Center"
-                                Header="Bottom">
-            <xctk:IntegerUpDown Minimum="0" Value="{Binding Bottom}" />
-        </HeaderedContentControl>
+        <StackPanel Orientation="Horizontal">
+            <HeaderedContentControl Margin="3 1 0 1"
+                                    HorizontalAlignment="Center"
+                                    Header="Top"
+                                    Style="{StaticResource CaptureRegionCoordinateControl}">
+                <xctk:IntegerUpDown FlowDirection="RightToLeft"
+                                    Minimum="0"
+                                    Style="{StaticResource MetroNumericUpDown}"
+                                    Value="{Binding Top}" />
+            </HeaderedContentControl>
+            <HeaderedContentControl Margin="0 1 3 1"
+                                    VerticalAlignment="Center"
+                                    Header="Left"
+                                    Style="{StaticResource CaptureRegionCoordinateControl}">
+                <xctk:IntegerUpDown Minimum="0"
+                                    Style="{StaticResource MetroNumericUpDown}"
+                                    Value="{Binding Left}" />
+            </HeaderedContentControl>
+        </StackPanel>
+        <StackPanel Grid.Row="2"
+                    Grid.Column="2"
+                    Orientation="Horizontal">
+            <HeaderedContentControl Margin="3 1 0 1"
+                                    HorizontalAlignment="Center"
+                                    Header="Bottom"
+                                    Style="{StaticResource CaptureRegionCoordinateControl}">
+                <xctk:IntegerUpDown FlowDirection="RightToLeft"
+                                    Minimum="0"
+                                    Style="{StaticResource MetroNumericUpDown}"
+                                    Value="{Binding Bottom}" />
+            </HeaderedContentControl>
+            <HeaderedContentControl Margin="0 1 3 1"
+                                    VerticalAlignment="Center"
+                                    Header="Right"
+                                    Style="{StaticResource CaptureRegionCoordinateControl}">
+                <xctk:IntegerUpDown Minimum="0"
+                                    Style="{StaticResource MetroNumericUpDown}"
+                                    Value="{Binding Right}" />
+            </HeaderedContentControl>
+        </StackPanel>
+
         <Button x:Name="SelectScreenRegion"
                 Grid.Row="1"
-                Grid.Column="1"
-                Content="Select Region" />
+                Grid.ColumnSpan="3"
+                Height="100"
+                Margin="22 5"
+                Style="{DynamicResource SquareButtonStyle}">
+            <Button.Content>
+                <TextBlock FontSize="18"
+                           FontWeight="Bold"
+                           Text="Pick Capture Region" />
+            </Button.Content>
+        </Button>
     </Grid>
 </UserControl>

@@ -1,0 +1,201 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
+    <Thickness x:Key="SectionMargin">10</Thickness>
+    <Thickness x:Key="SectionContentMargin">10 0</Thickness>
+    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <Style x:Key="SectionControl" TargetType="HeaderedContentControl">
+        <Setter Property="Margin" Value="{StaticResource SectionMargin}" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Template" Value="{DynamicResource VerticalHeaderedContentControlTemplate}" />
+        <Setter Property="HeaderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock Margin="0 5"
+                               FontSize="24"
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource BodyTextColorBrush}"
+                               Text="{TemplateBinding Content}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <ContentPresenter Margin="{StaticResource SectionContentMargin}"
+                                      VerticalAlignment="{TemplateBinding ContentControl.VerticalContentAlignment}"
+                                      Content="{TemplateBinding Content}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="CaptureRegionCoordinateControl" TargetType="HeaderedContentControl">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Margin" Value="3" />
+        <Setter Property="Width" Value="75" />
+        <Setter Property="Template" Value="{DynamicResource VerticalHeaderedContentControlTemplate}" />
+        <Setter Property="HeaderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock HorizontalAlignment="Center"
+                               FontSize="12"
+                               Foreground="{DynamicResource LabelTextBrush}"
+                               Text="{TemplateBinding Content}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <ContentPresenter Margin="1"
+                                      VerticalAlignment="{TemplateBinding ContentControl.VerticalContentAlignment}"
+                                      Content="{TemplateBinding Content}" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="VerticalHeaderedContentControlTemplate" TargetType="{x:Type HeaderedContentControl}">
+        <DockPanel Background="{TemplateBinding Background}" LastChildFill="True">
+            <ContentPresenter ContentSource="Header" DockPanel.Dock="Top" />
+            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" ContentSource="Content" />
+        </DockPanel>
+    </ControlTemplate>
+
+    <Style x:Key="MetroRepeatButton" TargetType="{x:Type RepeatButton}">
+        <Setter Property="Background" Value="{DynamicResource TransparentWhiteBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter x:Name="contentPresenter"
+                                          Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Opacity="0.75"
+                                          RecognizesAccessKey="True"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="contentPresenter" Property="Opacity" Value="1" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="False">
+                            <Setter TargetName="contentPresenter" Property="Opacity" Value=".5" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="#ADADAD" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="MetroSpinner" TargetType="{x:Type xctk:ButtonSpinner}">
+        <Setter Property="Background" Value="{DynamicResource GrayBrush7}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource TransparentWhiteBrush}" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="IsTabStop" Value="True" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type xctk:ButtonSpinner}">
+                    <Grid SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="Border"
+                                Grid.ColumnSpan="2"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}" />
+
+                        <ContentPresenter Margin="{TemplateBinding Padding}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          Focusable="False"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+
+                        <Grid Grid.Column="1"
+                              Width="{DynamicResource {x:Static SystemParameters.VerticalScrollBarWidthKey}}"
+                              Visibility="{TemplateBinding ShowButtonSpinner,
+                                                           Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <RepeatButton x:Name="PART_IncreaseButton"
+                                          ContentTemplate="{StaticResource IncreaseGlyphNormalKey}"
+                                          IsTabStop="{TemplateBinding IsTabStop}"
+                                          Style="{DynamicResource MetroRepeatButton}" />
+
+                            <RepeatButton x:Name="PART_DecreaseButton"
+                                          Grid.Row="1"
+                                          ContentTemplate="{StaticResource DecreaseGlyphNormalKey}"
+                                          IsTabStop="{TemplateBinding IsTabStop}"
+                                          Style="{DynamicResource MetroRepeatButton}" />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="MetroNumericUpDown" TargetType="Control">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" />
+        <Setter Property="HorizontalContentAlignment" Value="Right" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Control">
+                    <xctk:ButtonSpinner x:Name="Spinner"
+                                        AllowSpin="{Binding AllowSpin,
+                                                            RelativeSource={RelativeSource TemplatedParent}}"
+                                        Background="{TemplateBinding Background}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        IsTabStop="False"
+                                        ShowButtonSpinner="{Binding ShowButtonSpinner,
+                                                                    RelativeSource={RelativeSource TemplatedParent}}"
+                                        Style="{StaticResource MetroSpinner}">
+                        <TextBox x:Name="TextBox"
+                                 MinWidth="20"
+                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                 VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                 AcceptsReturn="False"
+                                 Background="Transparent"
+                                 BorderThickness="0"
+                                 ContextMenu="{TemplateBinding ContextMenu}"
+                                 FontFamily="{TemplateBinding FontFamily}"
+                                 FontSize="{TemplateBinding FontSize}"
+                                 FontStretch="{TemplateBinding FontStretch}"
+                                 FontStyle="{TemplateBinding FontStyle}"
+                                 FontWeight="{TemplateBinding FontWeight}"
+                                 Foreground="{TemplateBinding Foreground}"
+                                 IsReadOnly="{Binding IsReadOnly,
+                                                      RelativeSource={RelativeSource TemplatedParent}}"
+                                 TabIndex="{TemplateBinding TabIndex}"
+                                 Text="{Binding Text,
+                                                RelativeSource={RelativeSource TemplatedParent}}"
+                                 TextAlignment="{Binding TextAlignment,
+                                                         RelativeSource={RelativeSource TemplatedParent}}"
+                                 TextWrapping="NoWrap" />
+                    </xctk:ButtonSpinner>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

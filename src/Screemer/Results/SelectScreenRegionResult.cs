@@ -1,12 +1,11 @@
 ﻿using System;
 using Caliburn.Micro;
-using Screemer.Controls;
 using Screemer.Model;
 using Screemer.Views;
 
-namespace Screemer.Results
+namespace Screemer.Result
 {
-    public class SelectCaptureRegionResult : IResult
+    public class SelectScreenRegionResult : IResult
     {
         public ISelectCaptureRegion SelectCaptureRegion { get; set; }
 

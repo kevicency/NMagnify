@@ -14,9 +14,6 @@
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedSingleRowTabControl.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-                <ResourceDictionary>
-                    <Thickness x:Key="ContentMargin">10</Thickness>
-                </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
@@ -27,10 +24,12 @@
         </LinearGradientBrush>
     </Window.Background>
     <StackPanel>
-        <ContentControl x:Name="SelectProfile" Margin="{StaticResource ContentMargin}" />
-        <ContentControl x:Name="CaptureRegionSettings" Margin="{StaticResource ContentMargin}" />
-        <Button x:Name="ShowCapturedScreen"
-                Margin="{StaticResource ContentMargin}"
-                Content="Show" />
+        <HeaderedContentControl Header="Profile" Style="{StaticResource SectionControl}">
+            <ContentControl x:Name="SelectProfile" />
+        </HeaderedContentControl>
+        <HeaderedContentControl Header="Capture Region" Style="{StaticResource SectionControl}">
+            <ContentControl x:Name="CaptureRegionSettings" />
+        </HeaderedContentControl>
+        <Button x:Name="ShowCapturedScreen" Content="Show" />
     </StackPanel>
 </Controls:MetroWindow>

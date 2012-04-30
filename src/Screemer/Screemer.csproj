@@ -137,7 +137,7 @@
     <Compile Include="Views\CaptureRegionSettingsView.xaml.cs">
       <DependentUpon>CaptureRegionSettingsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SelectCaptureRegionOverlay.xaml.cs">
+    <Compile Include="Controls\SelectCaptureRegionOverlay.xaml.cs">
       <DependentUpon>SelectCaptureRegionOverlay.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SelectProfileView.xaml.cs">
@@ -177,6 +177,14 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Resources\Glyphs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PlaybackView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -185,7 +193,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SelectCaptureRegionOverlay.xaml">
+    <Page Include="Controls\SelectCaptureRegionOverlay.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
