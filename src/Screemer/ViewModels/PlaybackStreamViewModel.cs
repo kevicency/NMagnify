@@ -23,7 +23,9 @@ namespace Screemer.ViewModels
             _screenCapturer.CaptureRegionResolver = () => ActiveProfile != null
                                                               ? ActiveProfile.CaptureRegion
                                                               : null;
-            _screenCapturer.CapturesPerSecond = 25;
+            _screenCapturer.CapturesPerSecondResolver = () => ActiveProfile != null
+                                                              ? ActiveProfile.CPS
+                                                              : 25;
             _screenCapturer.ScreenCaptured += (sender, args) => { CapturedImage = args.CapturedImage; };
 
             CanShow = true;

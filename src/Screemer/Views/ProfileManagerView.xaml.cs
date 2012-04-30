@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Screemer.Views
 {
     /// <summary>
-    /// Interaction logic for SelectProfileView.xaml
+    /// Interaction logic for ProfileManagerView.xaml
     /// </summary>
-    public partial class SelectProfileView : UserControl
+    public partial class ProfileManagerView : UserControl
     {
-        public SelectProfileView()
+        public ProfileManagerView()
         {
             InitializeComponent();
         }

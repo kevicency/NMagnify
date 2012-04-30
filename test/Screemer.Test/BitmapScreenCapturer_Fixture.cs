@@ -93,7 +93,7 @@ namespace Screemer.Test
         [Test]
         public void CaptureAndSleep_SleepsAsLongAsNeededToGetDesiredCapturesPerSecond()
         {
-            Sut.CapturesPerSecond = 10;
+            Sut.CapturesPerSecondResolver = () => 10;
             Sut.CaptureRegionResolver = () => new ScreenRegion(0, 0, 1, 1);
             Stopwatch sw = new Stopwatch();
             sw.Start();

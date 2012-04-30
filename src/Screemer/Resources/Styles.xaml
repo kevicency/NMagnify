@@ -31,11 +31,29 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="CaptureRegionCoordinateControl" TargetType="HeaderedContentControl">
+    <Style x:Key="PropertyEditorStyle" TargetType="HeaderedContentControl">
         <Setter Property="Focusable" Value="False" />
         <Setter Property="Margin" Value="3" />
-        <Setter Property="Width" Value="75" />
-        <Setter Property="Template" Value="{DynamicResource VerticalHeaderedContentControlTemplate}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type HeaderedContentControl}">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition SharedSizeGroup="PropertyName" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <ContentPresenter Grid.Column="0"
+                                          HorizontalAlignment="Right"
+                                          VerticalAlignment="Center"
+                                          ContentSource="Header"
+                                          DockPanel.Dock="Left" />
+                        <ContentPresenter Grid.Column="1"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          ContentSource="Content" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
         <Setter Property="HeaderTemplate">
             <Setter.Value>
                 <DataTemplate>

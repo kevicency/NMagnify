@@ -17,6 +17,7 @@ namespace Screemer.Model
         {
             BitmapConverter = BitmapUtility.ConvertBitmapToImageSource;
             CaptureRegionResolver = () => new ScreenRegion();
+            CapturesPerSecondResolver = () => 25;
         }
 
         public BitmapToImageSource BitmapConverter { get; set; }
@@ -25,10 +26,12 @@ namespace Screemer.Model
 
         public event EventHandler<ScreenCapturedEventArgs> ScreenCaptured;
 
-        public int CapturesPerSecond { get; set; }
+        public int CapturesPerSecond { get { return CapturesPerSecondResolver(); } }
         public Func<ScreenRegion> CaptureRegionResolver { get; set; }
 
         public bool IsRunning { get; private set; }
+
+        public Func<int> CapturesPerSecondResolver { get; set; }
 
         public void Start()
         {
@@ -65,7 +68,7 @@ namespace Screemer.Model
             {
                 var capturedImage = BitmapConverter(bitmap);
 
-                if (CapturesPerSecond != 0)
+                if (CapturesPerSecond > 0)
                 {
                     var sleepTime = (int) ((1000f / CapturesPerSecond) - timer.ElapsedMilliseconds);
                     if (sleepTime > 0)

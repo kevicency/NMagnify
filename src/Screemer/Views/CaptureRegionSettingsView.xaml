@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto" />
-            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto" />
             <ColumnDefinition Width="auto" />
         </Grid.ColumnDefinitions>
         <xctk:IntegerUpDown Grid.Row="0"
@@ -26,7 +26,6 @@
                             Grid.Column="0"
                             Width="60"
                             VerticalAlignment="Center"
-                            FlowDirection="RightToLeft"
                             Style="{StaticResource MetroNumericUpDown}"
                             Value="{Binding Left}" />
         <xctk:IntegerUpDown Grid.Row="2"
@@ -43,16 +42,11 @@
         <Button x:Name="SelectScreenRegion"
                 Grid.Row="1"
                 Grid.Column="1"
-              
                 Margin="5"
+                HorizontalContentAlignment="Center"
+                VerticalContentAlignment="Center"
                 Content="{StaticResource appbar_crop}"
-VerticalContentAlignment="Center" HorizontalContentAlignment="Center"
-                Style="{DynamicResource MetroCircleButtonStyle}">
-            <!--
-                <Button.Content>
-                <Viewbox Child="{StaticResource appbar_crop}" />
-                </Button.Content>
-            -->
-        </Button>
+                Style="{DynamicResource MetroCircleButtonStyle}"
+                ToolTip="Crop Screen" />
     </Grid>
 </UserControl>

@@ -5,21 +5,21 @@ namespace Screemer.ViewModels
 {
     public class ShellViewModel : Screen, IShell
     {
-        public ShellViewModel(PlaybackStreamViewModel playbackStream, CaptureRegionSettingsViewModel captureRegionSettings, SelectProfileViewModel selectProfile)
+        public ShellViewModel(PlaybackStreamViewModel playbackStream, CaptureRegionSettingsViewModel captureRegionSettings, ProfileManagerViewModel profileManager)
         {
             DisplayName = "Screemer";
             PlaybackStream = playbackStream;
             CaptureRegionSettings = captureRegionSettings;
-            SelectProfile = selectProfile;
+            ProfileManager = profileManager;
 
             PlaybackStream.DeactivateWith(this);
             CaptureRegionSettings.ConductWith(this);
-            SelectProfile.ConductWith(this);
+            ProfileManager.ConductWith(this);
         }
 
         public PlaybackStreamViewModel PlaybackStream { get; private set; }
         public CaptureRegionSettingsViewModel CaptureRegionSettings { get; private set; }
-        public SelectProfileViewModel SelectProfile { get; set; }
+        public ProfileManagerViewModel ProfileManager { get; set; }
 
         public IEnumerable<IResult> ShowCapturedScreen()
         {

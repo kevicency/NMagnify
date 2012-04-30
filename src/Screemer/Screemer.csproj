@@ -116,6 +116,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="BitmapUtility.cs" />
+    <Compile Include="Converters\DialogColorConverter.cs" />
     <Compile Include="IActiveProfileProvider.cs" />
     <Compile Include="Model\BitmapToImageSource.cs" />
     <Compile Include="Model\IProfileManager.cs" />
@@ -127,10 +128,17 @@
     <Compile Include="Model\ScreenRegion.cs" />
     <Compile Include="Model\ScreenRegionSelectedEventArgs.cs" />
     <Compile Include="Results\SelectCaptureRegionResult.cs" />
+    <Compile Include="Views\Dialog\EditProfileDialog.cs" />
     <Compile Include="ViewModels\PlaybackStreamViewModel.cs" />
     <Compile Include="ViewModels\CaptureRegionSettingsViewModel.cs" />
-    <Compile Include="ViewModels\SelectProfileViewModel.cs" />
+    <Compile Include="ViewModels\ProfileManagerViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="Views\DialogView.xaml.cs">
+      <DependentUpon>DialogView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialog\EditProfile.xaml.cs">
+      <DependentUpon>EditProfile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlaybackStreamView.xaml.cs">
       <DependentUpon>PlaybackStreamView.xaml</DependentUpon>
     </Compile>
@@ -140,8 +148,8 @@
     <Compile Include="Controls\SelectCaptureRegionOverlay.xaml.cs">
       <DependentUpon>SelectCaptureRegionOverlay.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SelectProfileView.xaml.cs">
-      <DependentUpon>SelectProfileView.xaml</DependentUpon>
+    <Compile Include="Views\ProfileManagerView.xaml.cs">
+      <DependentUpon>ProfileManagerView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -192,6 +200,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\DialogView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialog\EditProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PlaybackStreamView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -204,7 +220,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SelectProfileView.xaml">
+    <Page Include="Views\ProfileManagerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

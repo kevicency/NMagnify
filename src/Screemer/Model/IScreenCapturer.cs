@@ -4,10 +4,10 @@ namespace Screemer.Model
 {
     public interface IScreenCapturer
     {
-        int CapturesPerSecond { get; set; }
         Func<ScreenRegion> CaptureRegionResolver { get; set; }
 
         bool IsRunning { get; }
+        Func<int> CapturesPerSecondResolver { get; set; }
         event EventHandler<ScreenCapturedEventArgs> ScreenCaptured;
 
         void Start();

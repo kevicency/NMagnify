@@ -1,4 +1,5 @@
 ﻿using System.Windows.Threading;
+using Caliburn.Micro.Contrib;
 using LightCore;
 using LightCore.Lifecycle;
 using Screemer.Controls;
@@ -21,7 +22,10 @@ namespace Screemer
 		/// By default, we are configured to use MEF
 		/// </summary>
 		protected override void Configure()
-		{
+        {
+            FrameworkExtensions.ViewLocator.EnableContextFallback();
+            ViewLocator.AddSubNamespaceMapping("Caliburn.Micro.Contrib.Dialogs", "Screemer.Views");
+
             var builder = new ContainerBuilder();
             builder.DefaultControlledBy<SingletonLifecycle>();
 
@@ -33,13 +37,13 @@ namespace Screemer
 		    builder.Register<ShellView>();
 		    builder.Register<PlaybackStreamViewModel>();
 		    builder.Register<CaptureRegionSettingsViewModel>();
-		    builder.Register<SelectProfileViewModel>();
-		    builder.Register<IActiveProfileProvider>(c => c.Resolve<SelectProfileViewModel>());
+		    builder.Register<ProfileManagerViewModel>();
+		    builder.Register<IActiveProfileProvider>(c => c.Resolve<ProfileManagerViewModel>());
 
 		    builder.Register<IScreenCapturer>(c => c.Resolve<BitmapScreenCapturer>());
 		    builder.Register<BitmapScreenCapturer>();
 		    builder.Register<IProfileManager, ProfileManager>();
-		    builder.Register<Func<Profile>>(c => () => c.Resolve<SelectProfileViewModel>().ActiveProfile);
+		    builder.Register<Func<Profile>>(c => () => c.Resolve<ProfileManagerViewModel>().ActiveProfile);
 
 		    _container = builder.Build();
 		}

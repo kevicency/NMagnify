@@ -118,8 +118,8 @@ namespace Screemer.Model
             if (File.Exists(file))
             {
                 File.Delete(file);
-                OnProfileDeleted(new ProfileEventArgs(profile));
             }
+            OnProfileDeleted(new ProfileEventArgs(profile));
         }
 
         public Profile Copy(Profile profile)

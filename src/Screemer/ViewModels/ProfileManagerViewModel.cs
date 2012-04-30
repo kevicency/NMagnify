@@ -1,17 +1,21 @@
 using System;
+using System.Collections.Generic;
 using Caliburn.Micro;
+using Caliburn.Micro.Contrib.Dialogs;
 using Screemer.Model;
 using System.Linq;
 using Screemer.Properties;
+using Caliburn.Micro.Contrib;
+using Screemer.Views.Dialog;
 
 namespace Screemer.ViewModels
 {
-    public class SelectProfileViewModel : Screen, IActiveProfileProvider
+    public class ProfileManagerViewModel : Screen, IActiveProfileProvider
     {
         readonly IProfileManager _profileManager;
         Profile _activeProfile;
 
-        public SelectProfileViewModel(IProfileManager profileManager)
+        public ProfileManagerViewModel(IProfileManager profileManager)
         {
             _profileManager = profileManager;
             AvailableProfiles = new BindableCollection<Profile>();
@@ -83,5 +87,61 @@ namespace Screemer.ViewModels
         {
             AvailableProfiles.Add(e.Profile);
         }
+
+        public bool CanDeleteActiveProfile
+        {
+            get { return AvailableProfiles.Count > 1 || ActiveProfile.Guid != Guid.Empty; }
+            
+        }
+
+        public IEnumerable<IResult> EditActiveProfile()
+        {
+            var editor = new EditProfileDialog()
+                         {
+                             Name = ActiveProfile.Name,
+                             CPS = ActiveProfile.CPS
+                         };
+
+            yield return editor.AsResult()
+                .PrefixViewContextWith("EditProfile")
+                .CancelOnResponse(Answer.Cancel);
+
+            ActiveProfile.Name = editor.Name;
+            ActiveProfile.CPS = editor.CPS;
+        }
+
+
+        public IEnumerable<IResult> DeleteActiveProfile()
+        {
+            var confirmation = new Question("Are you sure ?",
+                string.Format("Do you really want to delete the profile '{0}' ?", ActiveProfile.Name),
+                Answer.Yes,
+                Answer.No);
+
+            yield return confirmation.AsResult()
+                .CancelOnResponse(Answer.No);
+
+            var toDelete = ActiveProfile;
+            
+            if (AvailableProfiles.Count == 1)
+            {
+                AvailableProfiles.Add(Profile.Default);
+            }
+
+            var index = AvailableProfiles.IndexOf(ActiveProfile);
+            if (index == AvailableProfiles.Count - 1)
+            {
+                ActiveProfile = AvailableProfiles[index - 1];
+            }
+            else
+            {
+                ActiveProfile = AvailableProfiles[index + 1];
+            }
+            
+            _profileManager.Delete(toDelete);
+
+            yield break;
+        }
+
     }
 }

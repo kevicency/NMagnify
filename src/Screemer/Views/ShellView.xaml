@@ -14,16 +14,20 @@
     </Window.Background>
     <StackPanel>
         <HeaderedContentControl Header="Profile" Style="{StaticResource SectionControl}">
-            <ContentControl x:Name="SelectProfile" />
+            <ContentControl x:Name="ProfileManager" />
         </HeaderedContentControl>
-        <HeaderedContentControl Header="Capture Region" Style="{StaticResource SectionControl}" HorizontalContentAlignment="Center">
-            <ContentControl x:Name="CaptureRegionSettings" HorizontalAlignment="Center" HorizontalContentAlignment="Center"/>
+        <HeaderedContentControl HorizontalContentAlignment="Center"
+                                Header="Capture Region"
+                                Style="{StaticResource SectionControl}">
+            <ContentControl x:Name="CaptureRegionSettings"
+                            HorizontalAlignment="Center"
+                            HorizontalContentAlignment="Center" />
         </HeaderedContentControl>
         <HeaderedContentControl Header="Stream" Style="{StaticResource SectionControl}">
             <StackPanel>
                 <Button Margin="{StaticResource ContentElementMargin}"
                         HorizontalAlignment="Center"
-                        cal:Action.Target="{Binding PlaybackStream}"
+                        cal:Action.TargetWithoutContext="{Binding PlaybackStream}"
                         cal:Message.Attach="Show"
                         Content="{StaticResource appbar_play}"
                         Style="{DynamicResource MetroCircleButtonStyle}"
@@ -32,7 +36,7 @@
                                              Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <Button Margin="{StaticResource ContentElementMargin}"
                         HorizontalAlignment="Center"
-                        cal:Action.Target="{Binding PlaybackStream}"
+                        cal:Action.TargetWithoutContext="{Binding PlaybackStream}"
                         cal:Message.Attach="Hide"
                         Content="{StaticResource appbar_stop_playback}"
                         Style="{DynamicResource MetroCircleButtonStyle}"
