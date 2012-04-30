@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMagnify", "src\NMagnify\NMagnify.csproj", "{5A93295E-751F-4D10-9067-15B75209073E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMagnify,Test", "test\NMagnify.Test\NMagnify.Test.csproj", "{3A4F65AF-5F48-4D6F-94A8-0468A4386530}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NMagnify.Test", "test\NMagnify.Test\NMagnify.Test.csproj", "{3A4F65AF-5F48-4D6F-94A8-0468A4386530}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{ED65AA7D-2A8A-4427-8A2B-0F0858EC515C}"
+	ProjectSection(SolutionItems) = preProject
+		ReadMe.md = ReadMe.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
